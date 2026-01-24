@@ -1,0 +1,9 @@
+{
+  "repo": "repo-brain",
+  "status": "RED",
+  "reason": "AI Guard flagged unsafe patterns or secrets.",
+  "languages": null,
+  "framework": "null",
+  "ci": "null",
+  "timestamp": "2026-01-24T16:28:06Z"
+}
