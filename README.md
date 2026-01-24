@@ -144,3 +144,34 @@ Guarantees:
 Fails fast if core scripts are missing.
 Continues on non-critical script failures, logging warnings.
 Never modifies business logic or tests without explicit instruction.
+=======
+# 🧠 CAST BRAIN
+**Autonomous Repository Governance • CyberAI Network Protocols**
+
+CAST BRAIN (formerly Repo-Brain) is a high-performance autonomous governance engine. It transforms raw source code into "protocol-grade" infrastructure by enforcing the **MERMEDA v1.1.0** specification.
+
+## 🏥 The Hospital Suite
+
+- **Doctor (`brainctl doctor`)**: Real-time management script integrity audit.
+- **Surgeon (`brainctl surgeon`)**: Precision infrastructure repair via genomic snapshots.
+- **Autopsy (`brainctl autopsy`)**: Deep forensic trace of logic execution.
+- **Blackbox (`brainctl run`)**: High-fidelity flight recording of all management operations.
+- **Genome (`brainctl genome`)**: Logical diffing of governance evolution.
+- **Firewall (`brainctl firewall-install`)**: Zero-trust pre-commit denial system.
+- **Vitals (`brainctl vitals`)**: Physical repository telemetry capture.
+
+## 🚀 Deployment
+
+The CAST BRAIN Command Center can be deployed locally for individual repo management or at the fleet root for organization-wide governance.
+
+```bash
+# Local Execution
+./.repo-brain/brainctl run
+
+# Fleet Orchestration
+./.repo-brain/brainctl fleet --sync-plugins
+```
+
+Build by **CyberAI Network** & **GXQ STUDIO**
+[GitHub](https://github.com/SolanaRemix/repo-brain) | [Web](https://cyberai.network)
+>>>>>>> 563346b (Initial import of repo-brain)
