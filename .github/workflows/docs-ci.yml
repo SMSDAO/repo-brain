@@ -1,0 +1,67 @@
+name: Docs & Brain CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  docs-and-brain:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
+
+      - name: Typecheck & lint (if configured)
+        run: |
+          if npm run | grep -q "typecheck"; then
+            npm run typecheck
+          fi
+          if npm run | grep -q "lint"; then
+            npm run lint
+          fi
+
+      - name: Build dashboard (if configured)
+        run: |
+          if npm run | grep -q "build"; then
+            npm run build
+          fi
+
+      - name: Run brain pipeline (if present)
+        run: |
+          if [ -f ./brain.run.sh ]; then
+            chmod +x ./brain.run.sh
+            ./brain.run.sh
+          elif [ -f ./.repo-brain/brain.run.sh ]; then
+            chmod +x ./.repo-brain/brain.run.sh
+            ./.repo-brain/brain.run.sh
+          else
+            echo "No brain.run.sh found, skipping."
+          fi
+
+      - name: Validate docs tree
+        run: |
+          test -f ARCHITECTURE.md
+          test -f UIUX.md
+          test -d docs
+          test -f docs/index.md
+          test -f docs/architecture.md
+          test -f docs/ui-ux.md
+          test -f docs/pipeline.md
+          test -f docs/cli.md
