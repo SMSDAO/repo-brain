@@ -1,0 +1,5 @@
+{
+  "workflows": ["brain-auto-comments.yml" "brain-doctor.yml"],
+  "jobs": [],
+  "scanned_at": "2026-01-24T16:27:59Z"
+}

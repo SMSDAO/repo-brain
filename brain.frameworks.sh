@@ -17,6 +17,7 @@ if [ -f "$ROOT/package.json" ]; then
   elif grep -q '"@remix-run/react"' "$ROOT/package.json"; then framework="remix";
   elif grep -q '"vue"' "$ROOT/package.json"; then framework="vue";
   elif grep -q '"svelte"' "$ROOT/package.json"; then framework="svelte";
+  elif grep -q '"@angular/core"' "$ROOT/package.json"; then framework="angular";
   fi
 fi
 

@@ -2,17 +2,40 @@
 export enum RepoStatus {
   GREEN = 'GREEN',
   AUTO_FIXABLE = 'AUTO_FIXABLE',
-  RED = 'RED',
-  UNKNOWN = 'UNKNOWN'
+  RED = 'RED'
 }
+
+export enum Framework {
+  NONE = 'none',
+  NEXT = 'next',
+  REACT = 'react',
+  SVELTEKIT = 'sveltekit',
+  NUXT = 'nuxt',
+  ASTRO = 'astro',
+  REMIX = 'remix',
+  VUE = 'vue',
+  SVELTE = 'svelte',
+  ANGULAR = 'angular'
+}
+
+export type PhaseState = 'PENDING' | 'SUCCESS' | 'FAILED' | 'SKIPPED' | 'RUNNING';
+
+export interface PhaseResult {
+  id: number;
+  name: string;
+  status: PhaseState;
+  log?: string;
+}
+
+export type PRStatus = 'NONE' | 'DRAFT' | 'OPEN' | 'MERGED' | 'CLOSED';
 
 export interface Diagnosis {
   repo: string;
   status: RepoStatus;
   reason: string;
   languages: string[];
-  framework: string;
-  ci: string;
+  framework: Framework;
+  ci: 'github-actions' | 'none';
   timestamp: string;
   aiGuardComments?: string[];
   vulnerabilities?: number;
@@ -20,6 +43,26 @@ export interface Diagnosis {
   jobs?: string[];
   copilotInstructions?: string;
   lastRunLogs?: string[];
+  autopsyReport?: AutopsyReport;
+  phases?: PhaseResult[];
+  // PR & Automerge fields
+  prStatus: PRStatus;
+  prUrl?: string;
+  automergeEnabled: boolean;
+  automergeRules?: string[];
+  // V1 Hospital enhancements
+  web3Stack?: string[];
+  hasSmartBrainInsight?: boolean;
+  healthScore?: number; // Added for V2.2 scoring gauges
+}
+
+export interface AutopsyReport {
+  runId: string;
+  timestamp: string;
+  treeSnapshot: string[];
+  capturedFiles: string[];
+  traces: Record<string, string>;
+  envKeys: string[];
 }
 
 export interface HealthReport {
@@ -55,15 +98,6 @@ export interface FirewallReport {
   lastInterceptedFiles: string[];
 }
 
-export interface AutopsyReport {
-  runId: string;
-  timestamp: string;
-  treeSnapshot: string[];
-  capturedFiles: string[];
-  traces: Record<string, string>;
-  envKeys: string[];
-}
-
 export interface BlackboxRecording {
   runId: string;
   timestamp: string;
@@ -96,10 +130,4 @@ export interface ImmunizerReport {
 export interface FleetData {
   generatedAt: string;
   repos: Diagnosis[];
-}
-
-export interface ChartData {
-  name: string;
-  value: number;
-  color: string;
 }

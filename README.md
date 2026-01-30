@@ -1,177 +1,200 @@
-Cast-Brain Repo Hospital
-Autonomous Fleet Governance • Self-Healing • Self-Auditing • Operator-Grade
-The Repo-Brain Hospital is the complete ecosystem that maintains, diagnoses, repairs, audits, and observes your entire multi-repo fleet. It is built on the MERMEDA specification and includes:
-Brain Doctor — health diagnostics
-Brain Surgeon — repair from known-good versions
-Brain Autopsy — full execution replay
-Brain Genome — version diffing
-Brain Firewall — pre-commit safety
-Brain Vitals — performance metrics
-Brain Operator Dashboard — Next.js UI
-Brain Fleet Mode — multi-repo orchestration
-Brain Control Plane (brainctl) — unified CLI
-🏥 Hospital Modules
-1. Brain Doctor
-Runs a full health check on .repo-brain:
-Missing scripts
-Non-executable files
-MERMEDA presence
-jq/Node fallback
-Dry-run failures
-JSON schema validation
-Output:
-.repo-brain/brain.health.json
-.repo-brain/brain.health.md run brainctl doctor
-2. Brain Surgeon
-Repairs .repo-brain from a known-good version:
-3. Brain Autopsy
-Captures:
-Full execution trace
-Environment snapshot
-Git state
-Script logs
-Timing
-Run:brainctl autopsy
-Output:
-.repo-brain/autopsy/<timestamp>/
-4. Brain Genome
-Diffs two versions of .repo-brain:
-brain.genome.json
-brain.genome.md
-5. Brain Firewall
-Pre-commit hook that blocks:
-Secrets
-Subprocess calls
-Dangerous patterns
-Hardcoded tokens
-Install:
-6. Brain Vitals
-Collects live metrics:
-Repo size
-File count
-Test duration
-Build duration
-Git history depth
-Largest directories
-Run:brainctl vitals brainctl dashboard-build
-Deploy to Vercel using vercel.json.
-8. Brain Fleet Mode
-Runs the brain across all repos:
-Modes:
---dashboard
---autopsy-all
---doctor-all
---surgeon-all <version>
---genome <from> <to>
-🧬 Versioning
-Versions live in:
-.repo-brain.versions/
-Active version is copied into: .repo-brain/ build by GXQ STUDIO @SolanaRemix @CastQuest @SmartBrain
-7. Brain Operator Dashboard
-Next.js UI for:
-Fleet health
-Repo vitals
-Diagnosis summaries
-Status distribution
+# 🧠 repo‑brain  
+### Autonomous Multi‑Repo Governance Engine for Modern Engineering Fleets
 
-Living .repo-brain by GXQ STUDO & SOLANA REMIX
-This document defines the architecture, flow, responsibilities, and guarantees
-of the autonomous multi-repo brain system that governs your fleet of repositories.
-It covers:
-The core brain pipeline
-The hospital (doctor/surgeon/autopsy/genome/immunizer/vitals/blackbox/firewall)
-The fleet orchestrator
-The operator dashboard
-The CLI control plane (brainctl)
-Versioning and cross-platform guarantees
-1. Purpose
-The .repo-brain governs every repository in the fleet by:
-Detection
-Detects languages, frameworks, and CI configuration.
-Normalization
-Normalizes repo structure and corrects workflow/drift issues.
-Diagnosis
-Diagnoses repo health into diagnosis.json.
-Aggregates fleet-wide results into brain.fleet.json.
-Safe Fixes
-Applies safe fixes without touching business logic or tests.
-Verification
-Runs verification builds/tests.
-AI Guard
-Flags unsafe AI patterns or secrets.
-Generates auto-comments for flagged files in .repo-brain/auto-comments/.
-Green Maintenance
-Maintains green repos permanently while enabling fleet-wide monitoring.
-Cross-Platform JSON Handling
-Uses jq when available.
-Has Node fallback for JSON manipulation if jq is missing (Windows Git Bash compatible).
-CI Autodeploy
-Auto-deploys GitHub Actions YAMLs for:
+Repo‑brain is a protocol‑grade autonomous governance system that continuously scans, repairs, secures, and orchestrates entire fleets of repositories.  
+It acts as a **hospital**, **doctor**, **surgeon**, **security firewall**, **oracle**, and **fleet orchestrator** for your codebases — ensuring every repo stays healthy, consistent, and green.
+
+Whether you manage **1 repo or 500**, repo‑brain enforces invariants, fixes broken CI, normalizes configs, generates AI remediation PRs, predicts failures, and keeps your engineering ecosystem aligned.
+
+---
+
+# 🚀 Why Repo‑Brain Exists
+
+Modern engineering teams drown in:
+
+- broken CI  
+- inconsistent configs  
+- dependency drift  
+- framework mismatches  
+- security issues  
+- multi‑repo chaos  
+- missing governance  
+- slow PR reviews  
+- unpredictable failures  
+
+Repo‑brain solves this by acting as an **autonomous operator** that:
+
+- scans every repo  
+- diagnoses issues  
+- applies deterministic repairs  
+- enforces CI + governance  
+- generates AI remediation PRs  
+- predicts future failures  
+- syncs policies across fleets  
+
+It’s the **brain** your repos have always needed.
+
+---
+
+# 🏥 The Hospital Pipeline (15‑Phase Autonomous Engine)
+
+Repo‑brain’s core is the **Hospital Pipeline**, a deterministic multi‑stage system that transforms any repo into a healthy, invariant‑locked state.
+
+```mermaid
+flowchart TD
+    classDef repo fill:#161b22,stroke:#8b949e,stroke-width:1px,color:#c9d1d9;
+    classDef brain fill:#0d1117,stroke:#58a6ff,stroke-width:1px,color:#c9d1d9;
+    classDef ai fill:#1a1f2b,stroke:#f39c12,stroke-width:1px,color:#f1c40f;
+    classDef pr fill:#0d1117,stroke:#2ea043,stroke-width:2px,color:#c9d1d9;
+    classDef forecast fill:#1f2a3d,stroke:#f39c12,stroke-width:2px,color:#f1c40f;
+
+    A[📦 Repo Code + Config]:::repo
+
+    H1[🏥 hospital]:::brain
+    H2[🔍 detect]:::brain
+    H3[🧪 scan-actions]:::brain
+    H4[🧩 frameworks]:::brain
+    H5[🧩 frameworks.ci]:::brain
+    H6[🧪 solidity.detect]:::brain
+    H7[🧪 solidity.ci]:::brain
+    H8[🧪 rust]:::brain
+    H9[🧱 normalize]:::brain
+    H10[🧰 greenlock]:::brain
+    H11[🩺 doctor]:::brain
+    H12[🔧 surgeon]:::brain
+    H13[🧪 verify]:::brain
+    H14[🛡️ ai-guard]:::brain
+    H15[🔥 firewall]:::brain
+    H16[📊 vitals]:::brain
+    H17[🚀 fleet]:::brain
+
+    AI1[🤖 AI Remediation PR Generator]:::ai
+    AI2[📝 PR Visual Diff + Explanation]:::pr
+
+    F1[🔮 Next Failure Prediction]:::forecast
+    F2[📈 CI Failure Heatmap]:::forecast
+    F3[🌐 Public Repo Health Page]:::forecast
+
+    A --> H1 --> H2 --> H3 --> H4 --> H5 --> H6 --> H7 --> H8 --> H9 --> H10 --> H11 --> H12 --> H13 --> H14 --> H15 --> H16 --> H17
+
+    H12 --> AI1
+    H13 --> AI1
+    AI1 --> AI2
+
+    H13 --> F1
+    AI1 --> F1
+    F1 --> F2
+    F2 --> F3
+    AI2 --> F3
+    H16 --> F3
+
+    F1 --> H1
+
+**Autonomous Repository Governance • CyberAI Oracle Network Protocol**
+Modules & Responsibilities
+Repo‑brain is composed of specialized modules, each responsible for a phase of governance, repair, or security.
+
+Module	Purpose
+🏥 hospital	Full repo health scan + 15‑phase pipeline
+🩺 doctor	Diagnose structural, config, and workflow issues
+🔧 surgeon	Deterministic repairs to restore green builds
+⚰️ autopsy	Post‑mortem analysis after failures
+🧬 genome	Version diffing + mutation mapping
+🛡️ immunizer	Lock invariants + prevent unsafe mutations
+📊 vitals	Real‑time health metrics
+🎥 blackbox	Execution trace + operator replay
+🔥 firewall	Block unsafe patterns + enforce governance
+🚀 fleet	Multi‑repo sync + governance
+🧿 ai‑guard	LLM‑powered security scanning
+🧱 normalize	Normalize repo structure + configs
+🧪 verify	Build/test verification
+🧩 frameworks	Framework detection + CI strategy
+🧩 frameworks.ci	Multi‑framework CI generation
+🧪 solidity.detect	Solidity detection
+🧪 solidity.ci	Solidity CI generation
+🧪 rust	Rust toolchain + CI
+🧰 greenlock	Governance lock
+🧰 fix.safe	Safe auto‑repair
+🧠 Framework Detection, Scanning & Repair Matrix
+Repo‑brain supports a wide range of modern frameworks across frontend, backend, blockchain, CI, and configuration layers.
+
+Web / UI Frameworks
 Next.js
-Nuxt
-SvelteKit
-Astro
+
+Vite
+
+React
+
 Remix
-Rust
-Solidity (Foundry / Hardhat)
-Python (pytest / unittest)
-Generic Node projects.
-2. Master Runner (brain.run.sh)
-File: .repo-brain/brain.run.sh
-Role: Single entrypoint for each repo — humans and CI only call this.
-Responsibilities:
-Resolve repo root and .repo-brain path.
-Ensure all required scripts exist and are executable.
-Configure jq or Node JSON fallback.
-Execute the full brain pipeline in order:
-brain.detect.sh
-brain.scan-actions.sh
-brain.frameworks.sh
-brain.frameworks.ci.sh
-brain.solidity.detect.sh
-brain.solidity.ci.sh
-brain.rust.sh
-brain.normalize.sh
-brain.diagnose.sh
-brain.fix.safe.sh
-brain.verify.sh
-brain.ai.guard.sh
-brain.greenlock.sh
-brain.guard.sh
-Optionally call brain.fleet.sh for fleet updates.
-Auto-copy GitHub Actions YAMLs into .github/workflows/ if missing.
-Guarantees:
-Fails fast if core scripts are missing.
-Continues on non-critical script failures, logging warnings.
-Never modifies business logic or tests without explicit instruction.
-=======
-# 🧠 CAST BRAIN
-**Autonomous Repository Governance • CyberAI Network Protocols**
 
-CAST BRAIN (formerly Repo-Brain) is a high-performance autonomous governance engine. It transforms raw source code into "protocol-grade" infrastructure by enforcing the **MERMEDA v1.1.0** specification.
+Astro
 
-## 🏥 The Hospital Suite
+SvelteKit
 
-- **Doctor (`brainctl doctor`)**: Real-time management script integrity audit.
-- **Surgeon (`brainctl surgeon`)**: Precision infrastructure repair via genomic snapshots.
-- **Autopsy (`brainctl autopsy`)**: Deep forensic trace of logic execution.
-- **Blackbox (`brainctl run`)**: High-fidelity flight recording of all management operations.
-- **Genome (`brainctl genome`)**: Logical diffing of governance evolution.
-- **Firewall (`brainctl firewall-install`)**: Zero-trust pre-commit denial system.
-- **Vitals (`brainctl vitals`)**: Physical repository telemetry capture.
+Nuxt
 
-## 🚀 Deployment
+Vue
 
-The CAST BRAIN Command Center can be deployed locally for individual repo management or at the fleet root for organization-wide governance.
+Backend / API
+Node.js  (Express/Fastify)
 
-```bash
-# Local Execution
-./.repo-brain/brainctl run
+Python FastAPI / Flask
 
-# Fleet Orchestration
-./.repo-brain/brainctl fleet --sync-plugins
-```
+Go Fiber / Echo
 
-Build by **CyberAI Network** & **GXQ STUDIO**
-[GitHub](https://github.com/SolanaRemix/repo-brain) | [Web](https://cyberai.network)
->>>>>>> 563346b (Initial import of repo-brain)
+Rust Axum / Actix
+
+Java Spring Boot
+
+Blockchain
+Solidity (Hardhat / Foundry)
+
+Solana (Rust / Anchor)
+
+Static / Docs
+Astro
+
+VitePress
+
+Docusaurus
+
+MDX pipelines
+
+CI / DevOps
+GitHub Actions
+
+Vercel
+
+Docker
+
+PNPM / NPM / Yarn
+
+ESLint / Prettier
+
+TS project references
+
+Config
+YAML
+
+JSON
+
+TOML
+
+ENV
+
+TSConfig
+
+📂 Supported File Types
+Repo‑brain audits and repairs:
+
+.ts .tsx .js .jsx .css .scss .html .next
+
+.json .yaml .yml .toml
+
+.sol .rs .go .py .java
+
+.md .mdx
+
+.sh .ps1
+
+.env .env.local

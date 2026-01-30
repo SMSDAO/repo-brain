@@ -12,7 +12,7 @@ framework=$(${JQ_BIN:-jq} -r '.framework' "$DETECT_FILE")
 cmd="npm test"
 
 case "$framework" in
-  next|sveltekit|astro|remix) cmd="npm run build" ;;
+  next|sveltekit|astro|remix|angular) cmd="npm run build" ;;
   nuxt) cmd="npx nuxi build" ;;
   *) cmd="npm test" ;;
 esac
