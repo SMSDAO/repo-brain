@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test artifacts
+.repo-brain-test-sandbox/
+.repo-brain/auto-comments/
