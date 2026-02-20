@@ -15,7 +15,7 @@ log() { echo "🛡️ [ai-guard:surgeon] $1"; }
 scan_file() {
   local file="$1"
   local rel="${file#$ROOT/}"
-  local out_file="$OUT_DIR/$(echo "$rel" | tr '/\\.\\\\' '_').md"
+  local out_file="$OUT_DIR/$(echo "$rel" | tr '/.' '_').md"
 
   # Pattern Detection State
   RISKS=()
