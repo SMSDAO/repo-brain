@@ -70,7 +70,7 @@ jobs:
             <button 
               onClick={() => {
                 navigator.clipboard.writeText(yamlContent);
-                alert("YAML copied to clipboard");
+                alert("Workflow copied to clipboard");
               }}
               className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-[10px] font-black uppercase tracking-widest text-blue-400 rounded-lg transition-all"
             >

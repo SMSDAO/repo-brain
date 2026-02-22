@@ -8,6 +8,188 @@ Whether you manage **1 repo or 500**, repo‑brain enforces invariants, fixes br
 
 ---
 
+## 📚 Table of Contents
+
+- [Quick Start](#-quick-start)
+- [Admin Dashboard](#-admin-dashboard)
+- [Supabase & Database](#️-supabase--database)
+- [Deployment on Vercel](#️-deployment-on-vercel)
+- [Screenshots](#-screenshots)
+- [Why Repo-Brain Exists](#-why-repobrain-exists)
+- [Architecture & Development](#️-architecture--development)
+  - [The Hospital Pipeline](#-the-hospital-pipeline-15phase-autonomous-engine)
+  - [Modules & Responsibilities](#-modules--responsibilities)
+  - [Framework Detection](#-framework-detection-scanning--repair-matrix)
+  - [Supported File Types](#-supported-file-types)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
+
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- Supabase account (free tier works)
+- Git
+
+### Local Development Setup
+
+1. **Clone and Install**
+   ```bash
+   git clone https://github.com/SMSDAO/repo-brain
+   cd repo-brain
+   npm install
+   ```
+
+2. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your Supabase credentials
+   ```
+
+3. **Set Up Supabase Database**
+   - Create a new project at https://supabase.com
+   - Copy the Project URL and anon key
+   - Run the schema from `src/lib/supabase-schema.sql` in your Supabase SQL Editor
+   - Create default admin user (see Admin Access section below)
+
+4. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:3000
+
+5. **Login**
+   - Email: admin@admin.com
+   - Password: admin123
+
+---
+
+## 🔐 Admin Dashboard
+
+### Default Admin Access
+- **Email**: admin@admin.com
+- **Password**: admin123
+
+**⚠️ IMPORTANT**: Change this password immediately after first login!
+
+### Admin Features
+- **Overview** (`/admin/overview`): Fleet metrics, alert summaries, activity timeline
+- **Brains** (`/admin/brains`): Repository management, status tracking, trigger scans
+- **Alerts** (`/admin/alerts`): Security findings, vulnerabilities, mark as resolved
+- **Settings** (`/admin/settings`): Configuration view, environment status
+
+### Role-Based Access
+- **admin**: Full access to all features
+- **operator**: View and operate on repos
+- **viewer**: Read-only access
+
+Configure roles in Supabase `users` table.
+
+---
+
+## 🗄️ Supabase & Database
+
+### Database Schema
+The application uses 4 core tables:
+- **users**: User accounts with roles
+- **brains**: Monitored repositories  
+- **runs**: Pipeline execution history
+- **alerts**: Security findings and vulnerabilities
+
+### Auto-Migration
+On first run, the app checks for required tables. If missing, you can run:
+```bash
+# In Supabase SQL Editor, paste contents of:
+src/lib/supabase-schema.sql
+```
+
+### Environment Variables
+Required for local and Vercel deployment:
+```
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key (server-side only)
+VITE_GEMINI_API_KEY=your-gemini-key (optional)
+```
+
+### Creating the Default Admin User
+After running the schema, create the admin user:
+```sql
+-- In Supabase SQL Editor
+INSERT INTO auth.users (email, encrypted_password, email_confirmed_at)
+VALUES ('admin@admin.com', crypt('admin123', gen_salt('bf')), NOW());
+
+INSERT INTO public.users (id, email, role)
+SELECT id, email, 'admin' FROM auth.users WHERE email = 'admin@admin.com';
+```
+
+---
+
+## ☁️ Deployment on Vercel
+
+### Step-by-Step Deployment
+
+1. **Push to GitHub**
+   ```bash
+   git push origin main
+   ```
+
+2. **Connect to Vercel**
+   - Go to https://vercel.com
+   - Import your GitHub repository
+   - Vercel auto-detects Vite configuration
+
+3. **Configure Environment Variables**
+   In Vercel Project Settings → Environment Variables, add:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_GEMINI_API_KEY` (optional)
+
+4. **Deploy**
+   - Vercel automatically builds and deploys
+   - Build command: `npm run build`
+   - Output directory: `dist`
+
+5. **Verify Deployment**
+   - Visit your deployment URL
+   - Login with admin@admin.com / admin123
+   - Check `/admin/overview` loads correctly
+
+### Deployment Troubleshooting
+- If build fails, check build logs in Vercel dashboard
+- Verify all environment variables are set
+- Check that Supabase database is accessible from Vercel's IP ranges
+
+---
+
+## 📸 Screenshots
+
+### Landing / Main Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
+*Fleet monitoring dashboard with real-time status tracking*
+
+### Brain Status View
+![Brain Status](docs/screenshots/brains.png)
+*Repository health monitoring and management*
+
+### Admin Overview
+![Admin Overview](docs/screenshots/admin-overview.png)
+*Admin dashboard with fleet metrics and alerts*
+
+### Alerts List
+![Alerts](docs/screenshots/alerts.png)
+*Security findings and vulnerability tracking*
+
+### Login Screen
+
+**Note**: Screenshots are in `docs/screenshots/`. Add your own screenshots by replacing the placeholder images.
+![Login](docs/screenshots/login.png)
+*Secure authentication with Supabase*
+
+---
+
 # 🚀 Why Repo‑Brain Exists
 
 Modern engineering teams drown in:
@@ -36,7 +218,9 @@ It’s the **brain** your repos have always needed.
 
 ---
 
-# 🏥 The Hospital Pipeline (15‑Phase Autonomous Engine)
+# 🏗️ Architecture & Development
+
+## 🏥 The Hospital Pipeline (15‑Phase Autonomous Engine)
 
 Repo‑brain’s core is the **Hospital Pipeline**, a deterministic multi‑stage system that transforms any repo into a healthy, invariant‑locked state.
 
@@ -91,7 +275,7 @@ flowchart TD
     F1 --> H1
 
 **Autonomous Repository Governance • CyberAI Oracle Network Protocol**
-Modules & Responsibilities
+## 📦 Modules & Responsibilities
 Repo‑brain is composed of specialized modules, each responsible for a phase of governance, repair, or security.
 
 Module	Purpose
@@ -115,7 +299,7 @@ Module	Purpose
 🧪 rust	Rust toolchain + CI
 🧰 greenlock	Governance lock
 🧰 fix.safe	Safe auto‑repair
-🧠 Framework Detection, Scanning & Repair Matrix
+## 🧠 Framework Detection, Scanning & Repair Matrix
 Repo‑brain supports a wide range of modern frameworks across frontend, backend, blockchain, CI, and configuration layers.
 
 Web / UI Frameworks
@@ -184,7 +368,7 @@ ENV
 
 TSConfig
 
-📂 Supported File Types
+## 📂 Supported File Types
 Repo‑brain audits and repairs:
 
 .ts .tsx .js .jsx .css .scss .html .next
@@ -198,3 +382,51 @@ Repo‑brain audits and repairs:
 .sh .ps1
 
 .env .env.local
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+**Development Guidelines:**
+- Follow existing code style and conventions
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting PR
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+Built with:
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://react.dev/) - UI Framework
+- [Supabase](https://supabase.com/) - Backend & Authentication
+- [TailwindCSS](https://tailwindcss.com/) - Styling
+- [Lucide Icons](https://lucide.dev/) - Icon Library
+
+---
+
+## 📞 Support
+
+- 📧 Email: support@smsdao.io
+- 🐛 Issues: [GitHub Issues](https://github.com/SMSDAO/repo-brain/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/SMSDAO/repo-brain/discussions)
+
+---
+
+**⚡ Powered by MERMEDA v2.0 Protocol**  
+*Autonomous Repository Governance • CyberAI Oracle Network*

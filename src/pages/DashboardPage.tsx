@@ -1,23 +1,22 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
-import { RepoStatus, Diagnosis, AutopsyReport, Framework } from './types';
-import { FLEET_SUMMARY, MOCK_HEALTH_REPORT, MOCK_GENOME, MOCK_AUTOPSY, MOCK_IMMUNIZER, MOCK_VITALS, MOCK_BLACKBOX, MOCK_FIREWALL, SYSTEM_VERSION } from './constants';
-import RepoCard from './components/RepoCard';
-import SmartBrainTerminal from './components/SmartBrainTerminal';
-import HealthReportModal from './components/HealthReportModal';
-import GenomeModal from './components/GenomeModal';
-import AutopsyModal from './components/AutopsyModal';
-import ImmunizerModal from './components/ImmunizerModal';
-import DocumentationModal from './components/DocumentationModal';
-import VitalsModal from './components/VitalsModal';
-import BlackboxModal from './components/BlackboxModal';
-import FirewallModal from './components/FirewallModal';
-import ActionWorkflowModal from './components/ActionWorkflowModal';
-import ScanBox from './components/ScanBox';
-import { RepoBrainAI } from './services/geminiService';
+import { RepoStatus, Diagnosis, AutopsyReport, Framework } from '../types';
+import { FLEET_SUMMARY, MOCK_HEALTH_REPORT, MOCK_GENOME, MOCK_AUTOPSY, MOCK_IMMUNIZER, MOCK_VITALS, MOCK_BLACKBOX, MOCK_FIREWALL, SYSTEM_VERSION } from '../constants';
+import RepoCard from '../components/RepoCard';
+import SmartBrainTerminal from '../components/SmartBrainTerminal';
+import HealthReportModal from '../components/HealthReportModal';
+import GenomeModal from '../components/GenomeModal';
+import AutopsyModal from '../components/AutopsyModal';
+import ImmunizerModal from '../components/ImmunizerModal';
+import DocumentationModal from '../components/DocumentationModal';
+import VitalsModal from '../components/VitalsModal';
+import BlackboxModal from '../components/BlackboxModal';
+import FirewallModal from '../components/FirewallModal';
+import ActionWorkflowModal from '../components/ActionWorkflowModal';
+import ScanBox from '../components/ScanBox';
+import { RepoBrainAI } from '../services/geminiService';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
-const App: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const [fleet, setFleet] = useState(FLEET_SUMMARY.repos);
   const [statusFilter, setStatusFilter] = useState<RepoStatus | 'ALL'>('ALL');
   const [frameworkFilter, setFrameworkFilter] = useState<Framework | 'ALL'>('ALL');
@@ -104,7 +103,7 @@ const App: React.FC = () => {
   const toggleModal = (key: keyof typeof modals) => setModals(m => ({ ...m, [key]: !m[key] }));
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-10 py-6 lg:py-16 bg-slate-950 min-h-screen text-slate-100 font-inter">
+    <div className="max-w-screen-2xl mx-auto">
       {/* Overlays */}
       {activeLogs && <SmartBrainTerminal logs={activeLogs} onClose={() => setActiveLogs(null)} />}
       {modals.health && <HealthReportModal report={MOCK_HEALTH_REPORT} onClose={() => toggleModal('health')} />}
@@ -117,36 +116,6 @@ const App: React.FC = () => {
       {modals.firewall && <FirewallModal report={MOCK_FIREWALL} onClose={() => toggleModal('firewall')} />}
       {modals.workflow && selectedActionRepo && <ActionWorkflowModal repo={selectedActionRepo} onClose={() => toggleModal('workflow')} />}
 
-      <header className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 border-b border-slate-900 pb-8 md:pb-10">
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-8">
-          <div className="relative group cursor-pointer shrink-0" onClick={() => toggleModal('docs')}>
-            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 bg-gradient-to-br from-indigo-600 via-blue-600 to-emerald-600 rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] flex items-center justify-center text-3xl sm:text-4xl md:text-6xl shadow-2xl group-hover:scale-105 transition-all duration-500">
-              🧠
-            </div>
-            <div className="absolute -top-1 -right-1 w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 bg-emerald-500 rounded-full border-4 border-slate-950 animate-pulse"></div>
-          </div>
-          <div className="text-center sm:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-white uppercase italic leading-none">HOSPITAL <span className="text-blue-600">V2.2</span></h1>
-            <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2 sm:gap-3 mt-3 sm:mt-4 text-[8px] sm:text-[10px] md:text-xs text-slate-500 font-mono tracking-widest font-bold uppercase">
-              <span className="text-blue-500">CyberAI Oracle</span>
-              <span className="opacity-20 hidden sm:inline">/</span>
-              <span className="text-emerald-400">MERMEDA {SYSTEM_VERSION}</span>
-              <span className="opacity-20 hidden sm:inline">/</span>
-              <span className="text-rose-500 px-2 py-0.5 bg-rose-500/10 rounded-full border border-rose-500/20">LIVE</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-center md:justify-end gap-3 w-full md:w-auto">
-          <button onClick={() => toggleModal('docs')} className="w-full sm:w-auto bg-slate-900 border border-slate-800 hover:border-blue-500/40 rounded-xl sm:rounded-2xl px-6 md:px-10 py-3 md:py-5 flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-400">
-            System Spec
-          </button>
-          <button onClick={handleFleetAnalysis} disabled={isAnalyzing} className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl sm:rounded-2xl px-6 md:px-10 py-3 md:py-5 transition-all active:scale-95 text-[10px] sm:text-xs font-black uppercase tracking-widest shadow-2xl shadow-emerald-500/30">
-            {isAnalyzing ? 'Processing...' : 'Oracle Audit'}
-          </button>
-        </div>
-      </header>
-
       {/* Ticker System */}
       <div className="mb-8 md:mb-12 glass border border-slate-800/60 rounded-xl md:rounded-[2.5rem] py-3 md:py-6 px-4 md:px-10 overflow-hidden flex items-center gap-3 sm:gap-6 shadow-2xl relative">
         <div className="absolute inset-0 bg-blue-500/5 pointer-events-none"></div>
@@ -154,6 +123,12 @@ const App: React.FC = () => {
         <div className="flex-1 font-mono text-[10px] sm:text-sm md:text-lg text-slate-400 italic truncate relative z-10">
           {tickerMsg}
         </div>
+        <button onClick={() => toggleModal('docs')} className="shrink-0 bg-slate-900 border border-slate-800 hover:border-blue-500/40 rounded-xl px-4 py-2 text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 transition-all">
+          Spec
+        </button>
+        <button onClick={handleFleetAnalysis} disabled={isAnalyzing} className="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl px-4 py-2 transition-all text-[8px] sm:text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/30">
+          {isAnalyzing ? 'Processing...' : 'Audit'}
+        </button>
       </div>
 
       {/* Analytics Dashboard Grid */}
@@ -325,22 +300,8 @@ const App: React.FC = () => {
       <section id="admission-scan" className="mb-24 md:mb-32">
         <ScanBox onScanTrigger={(logs) => setActiveLogs(logs)} />
       </section>
-
-      <footer className="pt-16 md:pt-24 pb-24 md:pb-48 border-t border-slate-900 text-center flex flex-col items-center">
-        <div className="flex flex-wrap gap-4 sm:gap-8 lg:gap-16 justify-center opacity-40 grayscale hover:grayscale-0 transition-all mb-8 md:mb-12">
-           <div className="px-5 md:px-10 py-2.5 md:py-5 border border-slate-800 rounded-full font-black text-[8px] md:text-sm tracking-[0.3em] md:tracking-[0.5em] uppercase">CyberAI Protocol</div>
-           <div className="px-5 md:px-10 py-2.5 md:py-5 border border-slate-800 rounded-full font-black text-[8px] md:text-sm tracking-[0.3em] md:tracking-[0.5em] uppercase">Parallel Repair</div>
-           <div className="px-5 md:px-10 py-2.5 md:py-5 border border-slate-800 rounded-full font-black text-[8px] md:text-sm tracking-[0.3em] md:tracking-[0.5em] uppercase">Oracle Network</div>
-        </div>
-        <p className="text-slate-800 text-xs sm:text-sm md:text-2xl font-mono font-bold uppercase tracking-[0.4em] md:tracking-[0.8em] mb-4 md:mb-6 italic">REPO BRAIN HOSPITAL • {SYSTEM_VERSION} • CYBERAI NETWORK</p>
-        <p className="text-slate-900 text-[8px] sm:text-[9px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em] max-w-4xl leading-relaxed opacity-60 px-4">
-          Definitive autonomous repository governance for mission-critical fleets. Optimized for Web3, Cloud-Native, and Decentralized architectures. All signals monitored by CyberAI Oracle.
-          <br/>
-          <span className="text-blue-500/50 block mt-3 md:mt-4 font-mono">copyrights@ www.CyberAi.network by Repo Brain Hospital app</span>
-        </p>
-      </footer>
     </div>
   );
 };
 
-export default App;
+export default DashboardPage;
