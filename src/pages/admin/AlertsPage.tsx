@@ -86,7 +86,7 @@ const AlertsPage: React.FC = () => {
       );
     } catch (error) {
       console.error('Error resolving alert:', error);
-      alert('Failed to resolve alert');
+      alert(`Failed to resolve alert: ${error instanceof Error ? error.message : 'Unknown error'}. Please check your permissions and try again.`);
     }
   };
 
