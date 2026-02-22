@@ -14,8 +14,11 @@ export class RepoBrainAI {
   private ai: GoogleGenAI;
 
   constructor() {
-    // Initializing the Gemini API client with the environment API key.
-    this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('VITE_GEMINI_API_KEY environment variable is not set');
+    }
+    this.ai = new GoogleGenAI({ apiKey });
   }
 
   // Analyzes a single repository status and provides a repair recommendation.

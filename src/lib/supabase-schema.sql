@@ -50,9 +50,9 @@ ALTER TABLE public.runs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.alerts ENABLE ROW LEVEL SECURITY;
 
 -- Allow authenticated users to read all
-CREATE POLICY "Allow authenticated read" ON public.brains FOR SELECT TO authenticated USING (true);
-CREATE POLICY "Allow authenticated read" ON public.runs FOR SELECT TO authenticated USING (true);
-CREATE POLICY "Allow authenticated read" ON public.alerts FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated read brains" ON public.brains FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated read runs" ON public.runs FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated read alerts" ON public.alerts FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Allow users to read own data" ON public.users FOR SELECT TO authenticated USING (auth.uid() = id);
 
 -- Admin users can modify everything
