@@ -1,4 +1,9 @@
 -- Users table (extends Supabase auth.users)
+-- Role hierarchy: admin (full access) > operator (moderate) > viewer (read-only)
+-- Roles:
+--   - admin: Can modify all data (brains, runs, alerts)
+--   - operator: Can read all data, future: trigger scans
+--   - viewer: Can only read all data
 CREATE TABLE IF NOT EXISTS public.users (
   id UUID REFERENCES auth.users PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,

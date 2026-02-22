@@ -28,7 +28,13 @@ This directory contains the core Supabase infrastructure for the Repo Brain Hosp
    - Go to **Project Settings** → **API**
    - Copy **Project URL** → Set as `VITE_SUPABASE_URL`
    - Copy **anon/public key** → Set as `VITE_SUPABASE_ANON_KEY`
-   - Copy **service_role key** → Set as `SUPABASE_SERVICE_ROLE_KEY` (keep secret!)
+   - Copy **service_role key** → Set as `SUPABASE_SERVICE_ROLE_KEY`
+   
+   ⚠️ **CRITICAL SECURITY WARNING**: 
+   - The `SUPABASE_SERVICE_ROLE_KEY` bypasses all Row Level Security (RLS) policies
+   - **NEVER** use it in client-side code or expose it with `VITE_` prefix
+   - Only use in server-side contexts (backend APIs, GitHub Actions, CLI tools)
+   - Never commit this key to version control
 
 ### 4. Enable Authentication
 
