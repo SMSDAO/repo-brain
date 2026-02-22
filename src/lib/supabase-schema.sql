@@ -56,9 +56,9 @@ CREATE POLICY "Allow authenticated read alerts" ON public.alerts FOR SELECT TO a
 CREATE POLICY "Allow users to read own data" ON public.users FOR SELECT TO authenticated USING (auth.uid() = id);
 
 -- Admin users can modify everything
-CREATE POLICY "Allow admin full access" ON public.brains FOR ALL TO authenticated 
+CREATE POLICY "Allow admin full access to brains" ON public.brains FOR ALL TO authenticated 
   USING ((SELECT role FROM public.users WHERE id = auth.uid()) = 'admin');
-CREATE POLICY "Allow admin full access" ON public.runs FOR ALL TO authenticated 
+CREATE POLICY "Allow admin full access to runs" ON public.runs FOR ALL TO authenticated 
   USING ((SELECT role FROM public.users WHERE id = auth.uid()) = 'admin');
-CREATE POLICY "Allow admin full access" ON public.alerts FOR ALL TO authenticated 
+CREATE POLICY "Allow admin full access to alerts" ON public.alerts FOR ALL TO authenticated 
   USING ((SELECT role FROM public.users WHERE id = auth.uid()) = 'admin');
