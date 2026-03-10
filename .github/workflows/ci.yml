@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  ci:
+    name: Install · Lint · Typecheck · Build · Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint (if configured)
+        run: |
+          if npm run --silent 2>/dev/null | grep -q "^\s*lint$"; then
+            npm run lint
+          else
+            echo "No lint script configured, skipping."
+          fi
+
+      - name: Type check (if configured)
+        run: |
+          if npm run --silent 2>/dev/null | grep -q "^\s*typecheck$"; then
+            npm run typecheck
+          elif [ -f tsconfig.json ]; then
+            npx tsc --noEmit
+          else
+            echo "No typecheck configured, skipping."
+          fi
+
+      - name: Build
+        run: npm run build
+
+      - name: Run brain tests
+        run: |
+          if [ -f .repo-brain/brain.test.sh ]; then
+            chmod +x .repo-brain/brain.test.sh
+            ./.repo-brain/brain.test.sh
+          else
+            echo "No brain test suite found, skipping."
+          fi
