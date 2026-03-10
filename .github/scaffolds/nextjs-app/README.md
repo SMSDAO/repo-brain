@@ -1,6 +1,6 @@
 # nextjs-app
 
-A Next.js application scaffold managed by repo-brain.
+A Next.js 15 application scaffold managed by repo-brain.
 
 ## Getting Started
 
