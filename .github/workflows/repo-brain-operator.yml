@@ -1,0 +1,41 @@
+name: RepoBrain Operator
+
+on:
+  workflow_dispatch:
+    inputs:
+      AutoMerge:
+        description: 'Automatically merge the repair PRs'
+        type: boolean
+        default: false
+      ArchiveDead:
+        description: 'Archive repositories inactive for over a year'
+        type: boolean
+        default: false
+      Workers:
+        description: 'Number of parallel workers'
+        type: number
+        default: 8
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run RepoBrain Operator
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $params = @{
+            Org       = "SMSDAO"
+            Workspace = "${{ github.workspace }}/fleet"
+            Workers   = ${{ inputs.Workers }}
+          }
+          if ('${{ inputs.AutoMerge }}' -eq 'true')   { $params['AutoMerge']   = $true }
+          if ('${{ inputs.ArchiveDead }}' -eq 'true') { $params['ArchiveDead'] = $true }
+          ./repo-brain-operator.ps1 @params
