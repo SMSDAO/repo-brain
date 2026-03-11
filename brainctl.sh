@@ -56,18 +56,38 @@ case "$cmd" in
     bash "$BRAIN/brain.test.sh"
     ;;
 
+  deps)
+    bash "$BRAIN/brain.deps.sh"
+    ;;
+
+  branch-protect)
+    bash "$BRAIN/brain.branch-protect.sh"
+    ;;
+
+  classify)
+    bash "$BRAIN/brain.classify.sh"
+    ;;
+
+  docs)
+    bash "$BRAIN/brain.docs.sh"
+    ;;
+
   help|*)
     echo -e "\nUsage: brainctl <command> [args]"
     echo -e "\nCommands:"
-    echo "  run                Start 15-Phase Admission Pipeline"
+    echo "  run                Start 19-Phase Admission Pipeline"
     echo "  heal [v]           Surgical self-repair of brain modules"
     echo "  doctor             Audit brain health & script integrity"
     echo "  dashboard          Run the React UI (Local Dev)"
     echo "  pack               Build standalone brain.exe for Windows"
     echo "  autopsy            Perform a forensic execution trace"
     echo "  vitals             Capture repo size/build/test metrics"
-    echo "  test               Run Phase 18 Autonomous Test Suite"
+    echo "  test               Run Phase 19 Autonomous Test Suite"
     echo "  firewall-install   Install safety pre-commit hook"
+    echo "  deps               Audit & patch dependency vulnerabilities"
+    echo "  branch-protect     Enforce branch protection rules"
+    echo "  classify           Classify repository type and purpose"
+    echo "  docs               Generate security & module documentation"
     echo ""
     echo "Copyrights@ www.CyberAi.network"
     ;;
