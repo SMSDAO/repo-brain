@@ -42,7 +42,7 @@ const ScanBox: React.FC<Props> = ({ onScanTrigger }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-900/95 to-indigo-950/20 border-2 sm:border-4 border-slate-800 rounded-2xl sm:rounded-[3rem] md:rounded-[4rem] p-6 sm:p-10 lg:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.6)] relative overflow-hidden group transition-all duration-700">
+    <div className="neon-run-cyan neon-corners neon-scan-beam neon-scanlines bg-gradient-to-br from-slate-900 via-slate-900/95 to-indigo-950/20 border-2 sm:border-4 border-slate-700/60 rounded-2xl sm:rounded-[3rem] md:rounded-[4rem] p-6 sm:p-10 lg:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.6)] relative overflow-hidden group transition-all duration-700 aura-cyan">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] select-none pointer-events-none group-hover:opacity-10 transition-opacity hidden sm:block">
         <span className="text-[6rem] md:text-[10rem] xl:text-[15rem] font-black italic tracking-tighter uppercase leading-none">ADMISSION</span>
@@ -73,7 +73,7 @@ const ScanBox: React.FC<Props> = ({ onScanTrigger }) => {
               <button 
                 onClick={() => startScan('REPO')}
                 disabled={isScanning}
-                className="flex-1 lg:flex-none bg-white text-slate-950 text-[8px] sm:text-[10px] md:text-xs font-black uppercase tracking-widest px-3 sm:px-8 md:px-12 py-3.5 sm:py-6 md:py-8 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] hover:bg-blue-400 transition-all active:scale-95 shadow-2xl disabled:opacity-50"
+                className="flex-1 lg:flex-none neon-btn bg-white text-slate-950 text-[8px] sm:text-[10px] md:text-xs font-black uppercase tracking-widest px-3 sm:px-8 md:px-12 py-3.5 sm:py-6 md:py-8 rounded-xl sm:rounded-2xl md:rounded-[2.5rem] hover:bg-blue-400 transition-all active:scale-95 shadow-2xl disabled:opacity-50"
               >
                 Scan Repo
               </button>
@@ -113,7 +113,7 @@ const ScanBox: React.FC<Props> = ({ onScanTrigger }) => {
             { label: 'PR Repair', icon: '🧪', status: 'Optimal' },
             { label: 'Logic Lock', icon: '🔒', status: 'Guarded' },
           ].map(bot => (
-            <div key={bot.label} className="p-3 sm:p-4 md:p-6 bg-slate-950/40 border border-slate-800/50 rounded-xl sm:rounded-2xl md:rounded-3xl flex flex-col items-center gap-1 sm:gap-2 hover:border-blue-500/30 transition-all hover:bg-slate-950/60 shadow-inner group/bot cursor-help">
+            <div key={bot.label} className="neon-run-green p-3 sm:p-4 md:p-6 bg-slate-950/40 border border-slate-700/50 rounded-xl sm:rounded-2xl md:rounded-3xl flex flex-col items-center gap-1 sm:gap-2 hover:border-blue-500/30 transition-all hover:bg-slate-950/60 shadow-inner group/bot cursor-help aura-green">
               <span className="text-xl sm:text-2xl md:text-3xl transition-transform group-hover/bot:scale-110">{bot.icon}</span>
               <span className="text-[7px] sm:text-[8px] md:text-[10px] font-black uppercase tracking-widest text-slate-100 text-center">{bot.label}</span>
               <span className="text-[6px] sm:text-[7px] md:text-[8px] font-bold uppercase tracking-widest text-emerald-500 opacity-80">{bot.status}</span>

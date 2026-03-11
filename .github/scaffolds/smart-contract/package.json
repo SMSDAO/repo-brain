@@ -1,0 +1,22 @@
+{
+  "name": "smart-contract",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "lint": "eslint contracts --ext .sol && eslint scripts test --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "node": "hardhat node"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "hardhat": "^2.22.0",
+    "typescript": "^5.4.0"
+  }
+}

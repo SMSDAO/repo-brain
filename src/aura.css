@@ -1,0 +1,608 @@
+/* ==========================================================================
+   AURA FX — NEON GLOW SYSTEM  (REPO BRAIN HOSPITAL v2.2)
+   Animated running-line borders · scan beams · corner accents · text glow
+   ========================================================================== */
+
+/* ── Registered CSS property for smooth conic angle animation ── */
+@property --neon-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ── Keyframes ── */
+
+@keyframes neon-border-spin {
+  to { --neon-angle: 360deg; }
+}
+
+@keyframes neon-pulse-shadow {
+  0%, 100% { opacity: 1;  box-shadow: 0 0 10px var(--neon-color, #22d3ee), 0 0 30px var(--neon-color, #22d3ee), 0 0 60px var(--neon-color, #22d3ee); }
+  50%       { opacity: .8; box-shadow: 0 0  4px var(--neon-color, #22d3ee), 0 0 12px var(--neon-color, #22d3ee), 0 0 24px var(--neon-color, #22d3ee); }
+}
+
+@keyframes neon-flicker {
+  0%,  92%, 100% { opacity: 1; }
+  93%            { opacity: .55; }
+  95%            { opacity: 1; }
+  97%            { opacity: .35; }
+  99%            { opacity: .9; }
+}
+
+@keyframes neon-scanline-sweep {
+  0%   { top: -4px;   opacity: 0; }
+  5%   {              opacity: 1; }
+  95%  {              opacity: .7; }
+  100% { top: 100%;   opacity: 0; }
+}
+
+@keyframes neon-corner-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: .45; transform: scale(.7); }
+}
+
+@keyframes neon-ambient-drift {
+  0%, 100% { opacity: .07; transform: scale(1)   translateY(0); }
+  50%      { opacity: .14; transform: scale(1.05) translateY(-8px); }
+}
+
+@keyframes neon-bar-flow {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes neon-logo-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,.6), 0 0 40px rgba(59,130,246,.3), 0 0 80px rgba(59,130,246,.15); }
+  50%      { box-shadow: 0 0 35px rgba(34,211,238,.8), 0 0 70px rgba(34,211,238,.4), 0 0 120px rgba(34,211,238,.2); }
+}
+
+@keyframes neon-shine-sweep {
+  0%   { left: -150%; }
+  50%  { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* ==========================================================================
+   RUNNING BORDER SYSTEM
+   Uses CSS mask technique: padding region = 1px border strip that shows
+   the rotating conic gradient; inner content-box is masked out.
+   ========================================================================== */
+
+/* Base helper — applied to the ::before pseudo on all variants */
+.neon-run-blue,
+.neon-run-green,
+.neon-run-amber,
+.neon-run-rose,
+.neon-run-purple,
+.neon-run-cyan {
+  position: relative;
+  isolation: isolate;
+}
+
+/* ── Blue / Cyan (default brand) ── */
+.neon-run-blue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  60deg,
+    #06b6d4     120deg,
+    #3b82f6     160deg,
+    #818cf8     190deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 2.8s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Green / Emerald ── */
+.neon-run-green::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  60deg,
+    #34d399     120deg,
+    #10b981     165deg,
+    #6ee7b7     195deg,
+    transparent 250deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 3.4s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Amber / Gold ── */
+.neon-run-amber::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  60deg,
+    #fbbf24     120deg,
+    #f59e0b     165deg,
+    #fde68a     195deg,
+    transparent 250deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 4s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Rose / Red ── */
+.neon-run-rose::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  60deg,
+    #fb7185     115deg,
+    #f43f5e     160deg,
+    #fda4af     190deg,
+    transparent 245deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 2.2s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Purple ── */
+.neon-run-purple::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  60deg,
+    #a78bfa     120deg,
+    #7c3aed     165deg,
+    #c4b5fd     195deg,
+    transparent 250deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 3s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Cyan (bright accent) ── */
+.neon-run-cyan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent  0deg,
+    transparent  55deg,
+    #22d3ee     110deg,
+    #06b6d4     155deg,
+    #67e8f9     185deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 2s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==========================================================================
+   STATIC NEON GLOW — box-shadow stacks
+   ========================================================================== */
+
+.neon-glow-blue   { box-shadow: 0 0 8px rgba(59,130,246,.45),  0 0 24px rgba(59,130,246,.2),  0 0 48px rgba(59,130,246,.1);  }
+.neon-glow-cyan   { box-shadow: 0 0 8px rgba(34,211,238,.5),   0 0 24px rgba(34,211,238,.25), 0 0 48px rgba(34,211,238,.1);  }
+.neon-glow-green  { box-shadow: 0 0 8px rgba(16,185,129,.45),  0 0 24px rgba(16,185,129,.2),  0 0 48px rgba(16,185,129,.1);  }
+.neon-glow-amber  { box-shadow: 0 0 8px rgba(245,158,11,.45),  0 0 24px rgba(245,158,11,.2),  0 0 48px rgba(245,158,11,.1);  }
+.neon-glow-rose   { box-shadow: 0 0 8px rgba(244,63,94,.45),   0 0 24px rgba(244,63,94,.2),   0 0 48px rgba(244,63,94,.1);   }
+.neon-glow-purple { box-shadow: 0 0 8px rgba(124,58,237,.45),  0 0 24px rgba(124,58,237,.2),  0 0 48px rgba(124,58,237,.1);  }
+
+/* Pulsing version */
+.neon-pulse-blue {
+  --neon-color: #3b82f6;
+  animation: neon-pulse-shadow 2s ease-in-out infinite;
+}
+.neon-pulse-cyan {
+  --neon-color: #22d3ee;
+  animation: neon-pulse-shadow 1.8s ease-in-out infinite;
+}
+.neon-pulse-green {
+  --neon-color: #10b981;
+  animation: neon-pulse-shadow 2.2s ease-in-out infinite;
+}
+.neon-pulse-rose {
+  --neon-color: #f43f5e;
+  animation: neon-pulse-shadow 1.6s ease-in-out infinite;
+}
+.neon-pulse-amber {
+  --neon-color: #f59e0b;
+  animation: neon-pulse-shadow 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   TEXT NEON GLOW
+   ========================================================================== */
+
+.neon-text-blue   { text-shadow: 0 0 8px rgba(59,130,246,.9),  0 0 24px rgba(59,130,246,.5),  0 0 50px rgba(59,130,246,.3);  }
+.neon-text-cyan   { text-shadow: 0 0 8px rgba(34,211,238,.9),  0 0 24px rgba(34,211,238,.5),  0 0 50px rgba(34,211,238,.3);  }
+.neon-text-green  { text-shadow: 0 0 8px rgba(16,185,129,.9),  0 0 24px rgba(16,185,129,.5),  0 0 50px rgba(16,185,129,.3);  }
+.neon-text-amber  { text-shadow: 0 0 8px rgba(245,158,11,.9),  0 0 24px rgba(245,158,11,.5),  0 0 50px rgba(245,158,11,.3);  }
+.neon-text-rose   { text-shadow: 0 0 8px rgba(244,63,94,.9),   0 0 24px rgba(244,63,94,.5),   0 0 50px rgba(244,63,94,.3);   }
+.neon-text-white  { text-shadow: 0 0 8px rgba(255,255,255,.6), 0 0 20px rgba(200,220,255,.3), 0 0 40px rgba(59,130,246,.2);  }
+.neon-text-flicker { animation: neon-flicker 4s ease-in-out infinite; }
+
+/* ==========================================================================
+   LOGO / ICON PULSE GLOW
+   ========================================================================== */
+
+.neon-logo-pulse { animation: neon-logo-pulse 2.5s ease-in-out infinite; }
+
+/* ==========================================================================
+   SCAN BEAM — horizontal light sweep across a card
+   ========================================================================== */
+
+.neon-scan-beam {
+  position: relative;
+  overflow: hidden;
+}
+.neon-scan-beam::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(34,211,238,.0) 10%,
+    rgba(34,211,238,.9) 50%,
+    rgba(59,130,246,.9) 60%,
+    rgba(34,211,238,.0) 90%,
+    transparent 100%
+  );
+  box-shadow: 0 0 16px rgba(34,211,238,.8), 0 0 32px rgba(59,130,246,.5);
+  animation: neon-scanline-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ==========================================================================
+   SCANLINES OVERLAY — subtle CRT horizontal-line texture
+   ========================================================================== */
+
+.neon-scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(6,182,212,.018) 2px,
+    rgba(6,182,212,.018) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* ==========================================================================
+   CORNER ACCENTS — L-shaped neon brackets at TL and BR corners
+   ========================================================================== */
+
+.neon-corners {
+  position: relative;
+}
+
+/* Top-left bracket */
+.neon-corners::before {
+  content: "";
+  position: absolute;
+  top:  -1px;
+  left: -1px;
+  width:  16px;
+  height: 16px;
+  border-top:  2px solid #22d3ee;
+  border-left: 2px solid #22d3ee;
+  border-radius: 3px 0 0 0;
+  box-shadow: -2px -2px 10px rgba(34,211,238,.7), 0 0 16px rgba(34,211,238,.4);
+  pointer-events: none;
+  z-index: 20;
+  animation: neon-corner-pulse 2.4s ease-in-out infinite;
+}
+
+/* Bottom-right bracket */
+.neon-corners::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  right:  -1px;
+  width:  16px;
+  height: 16px;
+  border-bottom: 2px solid #22d3ee;
+  border-right:  2px solid #22d3ee;
+  border-radius: 0 0 3px 0;
+  box-shadow: 2px 2px 10px rgba(34,211,238,.7), 0 0 16px rgba(34,211,238,.4);
+  pointer-events: none;
+  z-index: 20;
+  animation: neon-corner-pulse 2.4s ease-in-out infinite 1.2s;
+}
+
+/* Rose corners variant */
+.neon-corners-rose::before {
+  border-top-color:  #f43f5e;
+  border-left-color: #f43f5e;
+  box-shadow: -2px -2px 10px rgba(244,63,94,.7), 0 0 16px rgba(244,63,94,.4);
+}
+.neon-corners-rose::after {
+  border-bottom-color: #f43f5e;
+  border-right-color:  #f43f5e;
+  box-shadow: 2px 2px 10px rgba(244,63,94,.7), 0 0 16px rgba(244,63,94,.4);
+}
+
+/* Amber corners variant */
+.neon-corners-amber::before {
+  border-top-color:  #f59e0b;
+  border-left-color: #f59e0b;
+  box-shadow: -2px -2px 10px rgba(245,158,11,.7), 0 0 16px rgba(245,158,11,.4);
+}
+.neon-corners-amber::after {
+  border-bottom-color: #f59e0b;
+  border-right-color:  #f59e0b;
+  box-shadow: 2px 2px 10px rgba(245,158,11,.7), 0 0 16px rgba(245,158,11,.4);
+}
+
+/* Green corners variant */
+.neon-corners-green::before {
+  border-top-color:  #10b981;
+  border-left-color: #10b981;
+  box-shadow: -2px -2px 10px rgba(16,185,129,.7), 0 0 16px rgba(16,185,129,.4);
+}
+.neon-corners-green::after {
+  border-bottom-color: #10b981;
+  border-right-color:  #10b981;
+  box-shadow: 2px 2px 10px rgba(16,185,129,.7), 0 0 16px rgba(16,185,129,.4);
+}
+
+/* ==========================================================================
+   AMBIENT AURA — soft radial glow behind the card
+   ========================================================================== */
+
+/* Inject an ambient radial glow BEFORE the card */
+.aura-blue {
+  box-shadow:
+    0 0 0 1px rgba(59,130,246,.18),
+    0 8px 40px rgba(59,130,246,.12),
+    0 24px 80px rgba(59,130,246,.06);
+}
+.aura-green {
+  box-shadow:
+    0 0 0 1px rgba(16,185,129,.18),
+    0 8px 40px rgba(16,185,129,.12),
+    0 24px 80px rgba(16,185,129,.06);
+}
+.aura-amber {
+  box-shadow:
+    0 0 0 1px rgba(245,158,11,.18),
+    0 8px 40px rgba(245,158,11,.12),
+    0 24px 80px rgba(245,158,11,.06);
+}
+.aura-rose {
+  box-shadow:
+    0 0 0 1px rgba(244,63,94,.2),
+    0 8px 40px rgba(244,63,94,.15),
+    0 24px 80px rgba(244,63,94,.07);
+}
+.aura-cyan {
+  box-shadow:
+    0 0 0 1px rgba(34,211,238,.2),
+    0 8px 40px rgba(34,211,238,.12),
+    0 24px 80px rgba(34,211,238,.06);
+}
+
+/* ==========================================================================
+   HEALTH BAR GLOW — animated shimmer on progress bars
+   ========================================================================== */
+
+.neon-bar-green {
+  background: linear-gradient(90deg,
+    #10b981,
+    #34d399,
+    #6ee7b7,
+    #10b981
+  );
+  background-size: 200% 100%;
+  animation: neon-bar-flow 2.5s linear infinite;
+  box-shadow: 0 0 8px rgba(16,185,129,.6), 0 0 20px rgba(16,185,129,.3);
+}
+.neon-bar-amber {
+  background: linear-gradient(90deg,
+    #f59e0b,
+    #fbbf24,
+    #fde68a,
+    #f59e0b
+  );
+  background-size: 200% 100%;
+  animation: neon-bar-flow 2.5s linear infinite;
+  box-shadow: 0 0 8px rgba(245,158,11,.6), 0 0 20px rgba(245,158,11,.3);
+}
+.neon-bar-rose {
+  background: linear-gradient(90deg,
+    #f43f5e,
+    #fb7185,
+    #fda4af,
+    #f43f5e
+  );
+  background-size: 200% 100%;
+  animation: neon-bar-flow 2.5s linear infinite;
+  box-shadow: 0 0 8px rgba(244,63,94,.6), 0 0 20px rgba(244,63,94,.3);
+}
+
+/* ==========================================================================
+   NEON BUTTON SHINE — a light sweep on hover
+   ========================================================================== */
+
+.neon-btn {
+  position: relative;
+  overflow: hidden;
+}
+.neon-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: neon-shine-sweep 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   TABLE ROW HOVER NEON
+   ========================================================================== */
+
+.neon-table-row {
+  transition: background-color .15s ease, box-shadow .15s ease;
+}
+.neon-table-row:hover {
+  background-color: rgba(34,211,238,.04) !important;
+  box-shadow: inset 0 0 0 1px rgba(34,211,238,.12),
+              inset 4px 0 0 rgba(34,211,238,.5);
+}
+
+/* ==========================================================================
+   HEADER NEON BORDER — glowing bottom edge on the app header
+   ========================================================================== */
+
+.neon-header-border {
+  box-shadow: 0 1px 0 rgba(34,211,238,.25),
+              0 2px 16px rgba(34,211,238,.1),
+              0 4px 32px rgba(59,130,246,.06);
+}
+
+/* ==========================================================================
+   NAV ACTIVE NEON — glow on the active sidebar nav item
+   ========================================================================== */
+
+.neon-nav-active {
+  box-shadow:
+    0 0 0 1px rgba(59,130,246,.4),
+    0 0 16px rgba(59,130,246,.3),
+    inset 0 0 12px rgba(59,130,246,.1);
+}
+
+/* ==========================================================================
+   TICKER / ORACLE FEED — pulsing ambient on the live feed bar
+   ========================================================================== */
+
+.neon-ticker {
+  box-shadow:
+    0 0 0 1px rgba(59,130,246,.2),
+    0 4px 30px rgba(59,130,246,.12),
+    inset 0 0 40px rgba(59,130,246,.04);
+}
+
+/* ==========================================================================
+   INPUT FIELD NEON FOCUS
+   ========================================================================== */
+
+.neon-input:focus {
+  border-color: rgba(34,211,238,.5) !important;
+  box-shadow:
+    0 0 0 3px rgba(34,211,238,.12),
+    0 0 20px rgba(34,211,238,.1),
+    inset 0 0 12px rgba(34,211,238,.04) !important;
+  outline: none;
+}
+
+/* ==========================================================================
+   PHASE DOT GLOW — mini phase-grid squares
+   ========================================================================== */
+
+.neon-phase-success { box-shadow: 0 0 6px rgba(16,185,129,.7),  0 0 12px rgba(16,185,129,.3); }
+.neon-phase-failed  { box-shadow: 0 0 6px rgba(244,63,94,.8),   0 0 14px rgba(244,63,94,.4); animation: neon-pulse-shadow 1.2s ease-in-out infinite; --neon-color: #f43f5e; }
+.neon-phase-running { box-shadow: 0 0 6px rgba(59,130,246,.7),  0 0 12px rgba(59,130,246,.3); }
+
+/* ==========================================================================
+   UTILITY — disable FX for reduced-motion users
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-run-blue::before,
+  .neon-run-green::before,
+  .neon-run-amber::before,
+  .neon-run-rose::before,
+  .neon-run-purple::before,
+  .neon-run-cyan::before,
+  .neon-scan-beam::after,
+  .neon-scanlines::before,
+  .neon-corners::before,
+  .neon-corners::after,
+  .neon-corners-rose::before,
+  .neon-corners-rose::after,
+  .neon-corners-amber::before,
+  .neon-corners-amber::after,
+  .neon-corners-green::before,
+  .neon-corners-green::after,
+  .neon-btn::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

@@ -30,11 +30,11 @@ const LoginPage: React.FC = () => {
     <div className="w-full">
       {/* Logo Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-600 via-blue-600 to-emerald-600 rounded-3xl mb-4 animate-pulse shadow-2xl shadow-blue-500/30">
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-600 via-blue-600 to-emerald-600 rounded-3xl mb-4 neon-logo-pulse">
           <span className="text-5xl">🧠</span>
         </div>
         <h1 className="text-4xl font-black tracking-tighter text-white uppercase italic mb-2">
-          HOSPITAL <span className="text-blue-600">V2.2</span>
+          HOSPITAL <span className="text-blue-600 neon-text-blue">V2.2</span>
         </h1>
         <p className="text-sm font-mono text-slate-500 uppercase tracking-widest">
           CyberAI Oracle Access
@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
       </div>
 
       {/* Login Form */}
-      <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl">
+      <div className="neon-run-cyan neon-corners neon-scan-beam bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 shadow-2xl aura-cyan">
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <div className="flex items-center gap-3 p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl">
@@ -62,7 +62,7 @@ const LoginPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-blue-500/50 transition-all text-sm font-medium placeholder:text-slate-700"
+                className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl py-3 pl-12 pr-4 neon-input outline-none focus:border-blue-500/50 transition-all text-sm font-medium placeholder:text-slate-700"
                 placeholder="operator@cyberai.network"
               />
             </div>
@@ -79,7 +79,7 @@ const LoginPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-blue-500/50 transition-all text-sm font-medium placeholder:text-slate-700"
+                className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl py-3 pl-12 pr-4 neon-input outline-none focus:border-blue-500/50 transition-all text-sm font-medium placeholder:text-slate-700"
                 placeholder="Enter secure access key"
               />
             </div>
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-black uppercase tracking-widest py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-blue-500/20 text-sm"
+            className="neon-btn w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-black uppercase tracking-widest py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl neon-glow-blue text-sm"
           >
             {loading ? 'Authenticating...' : 'Initialize Access'}
           </button>

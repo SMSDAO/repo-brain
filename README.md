@@ -273,100 +273,50 @@ flowchart TD
     H16 --> F3
 
     F1 --> H1
+```
 
 **Autonomous Repository Governance • CyberAI Oracle Network Protocol**
+
 ## 📦 Modules & Responsibilities
 Repo‑brain is composed of specialized modules, each responsible for a phase of governance, repair, or security.
 
-Module	Purpose
-🏥 hospital	Full repo health scan + 15‑phase pipeline
-🩺 doctor	Diagnose structural, config, and workflow issues
-🔧 surgeon	Deterministic repairs to restore green builds
-⚰️ autopsy	Post‑mortem analysis after failures
-🧬 genome	Version diffing + mutation mapping
-🛡️ immunizer	Lock invariants + prevent unsafe mutations
-📊 vitals	Real‑time health metrics
-🎥 blackbox	Execution trace + operator replay
-🔥 firewall	Block unsafe patterns + enforce governance
-🚀 fleet	Multi‑repo sync + governance
-🧿 ai‑guard	LLM‑powered security scanning
-🧱 normalize	Normalize repo structure + configs
-🧪 verify	Build/test verification
-🧩 frameworks	Framework detection + CI strategy
-🧩 frameworks.ci	Multi‑framework CI generation
-🧪 solidity.detect	Solidity detection
-🧪 solidity.ci	Solidity CI generation
-🧪 rust	Rust toolchain + CI
-🧰 greenlock	Governance lock
-🧰 fix.safe	Safe auto‑repair
+| Module | Purpose |
+|--------|---------|
+| 🏥 hospital | Full repo health scan + 15‑phase pipeline |
+| 🩺 doctor | Diagnose structural, config, and workflow issues |
+| 🔧 surgeon | Deterministic repairs to restore green builds |
+| ⚰️ autopsy | Post‑mortem analysis after failures |
+| 🧬 genome | Version diffing + mutation mapping |
+| 🛡️ immunizer | Lock invariants + prevent unsafe mutations |
+| 📊 vitals | Real‑time health metrics |
+| 🎥 blackbox | Execution trace + operator replay |
+| 🔥 firewall | Block unsafe patterns + enforce governance |
+| 🚀 fleet | Multi‑repo sync + governance |
+| 🧿 ai‑guard | LLM‑powered security scanning |
+| 🧱 normalize | Normalize repo structure + configs |
+| 🧪 verify | Build/test verification |
+| 🧩 frameworks | Framework detection + CI strategy |
+| 🧩 frameworks.ci | Multi‑framework CI generation |
+| 🧪 solidity.detect | Solidity detection |
+| 🧪 solidity.ci | Solidity CI generation |
+| 🧪 rust | Rust toolchain + CI |
+| 🧰 greenlock | Governance lock |
+| 🧰 fix.safe | Safe auto‑repair |
+
 ## 🧠 Framework Detection, Scanning & Repair Matrix
 Repo‑brain supports a wide range of modern frameworks across frontend, backend, blockchain, CI, and configuration layers.
 
-Web / UI Frameworks
-Next.js
+**Web / UI Frameworks:** Next.js · Vite · React · Remix · Astro · SvelteKit · Nuxt · Vue
 
-Vite
+**Backend / API:** Node.js (Express/Fastify) · Python FastAPI/Flask · Go Fiber/Echo · Rust Axum/Actix · Java Spring Boot
 
-React
+**Blockchain:** Solidity (Hardhat/Foundry) · Solana (Rust/Anchor)
 
-Remix
+**Static / Docs:** Astro · VitePress · Docusaurus · MDX pipelines
 
-Astro
+**CI / DevOps:** GitHub Actions · Vercel · Docker · PNPM/NPM/Yarn · ESLint/Prettier · TS project references
 
-SvelteKit
-
-Nuxt
-
-Vue
-
-Backend / API
-Node.js  (Express/Fastify)
-
-Python FastAPI / Flask
-
-Go Fiber / Echo
-
-Rust Axum / Actix
-
-Java Spring Boot
-
-Blockchain
-Solidity (Hardhat / Foundry)
-
-Solana (Rust / Anchor)
-
-Static / Docs
-Astro
-
-VitePress
-
-Docusaurus
-
-MDX pipelines
-
-CI / DevOps
-GitHub Actions
-
-Vercel
-
-Docker
-
-PNPM / NPM / Yarn
-
-ESLint / Prettier
-
-TS project references
-
-Config
-YAML
-
-JSON
-
-TOML
-
-ENV
-
-TSConfig
+**Config:** YAML · JSON · TOML · ENV · TSConfig
 
 ## 📂 Supported File Types
 Repo‑brain audits and repairs:

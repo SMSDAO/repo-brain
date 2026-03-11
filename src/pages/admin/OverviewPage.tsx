@@ -98,6 +98,8 @@ const OverviewPage: React.FC = () => {
           value={stats.totalBrains}
           color="text-blue-500"
           bgColor="bg-blue-500/10"
+          neonClass="neon-run-blue"
+          auraClass="aura-blue"
         />
         <StatCard
           icon={<Activity size={32} />}
@@ -105,6 +107,8 @@ const OverviewPage: React.FC = () => {
           value={stats.greenBrains}
           color="text-emerald-500"
           bgColor="bg-emerald-500/10"
+          neonClass="neon-run-green"
+          auraClass="aura-green"
         />
         <StatCard
           icon={<TrendingUp size={32} />}
@@ -112,6 +116,8 @@ const OverviewPage: React.FC = () => {
           value={stats.autoFixableBrains}
           color="text-amber-500"
           bgColor="bg-amber-500/10"
+          neonClass="neon-run-amber"
+          auraClass="aura-amber"
         />
         <StatCard
           icon={<AlertTriangle size={32} />}
@@ -119,13 +125,15 @@ const OverviewPage: React.FC = () => {
           value={stats.criticalAlerts}
           color="text-rose-500"
           bgColor="bg-rose-500/10"
+          neonClass="neon-run-rose"
+          auraClass="aura-rose"
         />
       </div>
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Alerts by Severity */}
-        <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+        <div className="neon-run-rose neon-scan-beam bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl aura-rose">
           <h2 className="text-xl font-black uppercase text-white mb-6 flex items-center gap-3">
             <AlertTriangle size={24} className="text-rose-500" />
             Alerts by Severity
@@ -164,7 +172,7 @@ const OverviewPage: React.FC = () => {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+        <div className="neon-run-blue neon-scanlines bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl aura-blue">
           <h2 className="text-xl font-black uppercase text-white mb-6 flex items-center gap-3">
             <Activity size={24} className="text-blue-500" />
             Recent Activity
@@ -174,7 +182,7 @@ const OverviewPage: React.FC = () => {
               recentActivity.map((alert) => (
                 <div
                   key={alert.id}
-                  className="p-4 bg-slate-950/70 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors"
+                  className="neon-table-row p-4 bg-slate-950/70 border border-slate-800 rounded-xl"
                 >
                   <div className="flex items-start gap-3">
                     <SeverityBadge severity={alert.severity} />
@@ -197,7 +205,7 @@ const OverviewPage: React.FC = () => {
       </div>
 
       {/* Health Distribution */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+      <div className="neon-run-purple neon-scan-beam bg-slate-900/60 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
         <h2 className="text-xl font-black uppercase text-white mb-6 flex items-center gap-3">
           <BrainIcon size={24} className="text-blue-500" />
           Brain Health Distribution
@@ -218,8 +226,10 @@ const StatCard: React.FC<{
   value: number;
   color: string;
   bgColor: string;
-}> = ({ icon, label, value, color, bgColor }) => (
-  <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
+  neonClass?: string;
+  auraClass?: string;
+}> = ({ icon, label, value, color, bgColor, neonClass = 'neon-run-blue', auraClass = 'aura-blue' }) => (
+  <div className={`${neonClass} ${auraClass} bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl`}>
     <div className={`${bgColor} ${color} w-12 h-12 rounded-xl flex items-center justify-center mb-4`}>
       {icon}
     </div>
@@ -269,7 +279,10 @@ const HealthCard: React.FC<{ label: string; count: number; color: string }> = ({
   const classes = colorClasses[color as keyof typeof colorClasses];
 
   return (
-    <div className={`${classes.bg} border ${classes.border} rounded-2xl p-6 text-center`}>
+    <div className={`${classes.bg} ${
+      color === 'emerald' ? 'neon-run-green' :
+      color === 'amber'   ? 'neon-run-amber' : 'neon-run-rose'
+    } border ${classes.border} rounded-2xl p-6 text-center`}>
       <div className={`text-5xl font-black ${classes.text} mb-2`}>{count}</div>
       <div className={`text-sm ${classes.subtext} font-bold uppercase tracking-wider`}>{label}</div>
     </div>

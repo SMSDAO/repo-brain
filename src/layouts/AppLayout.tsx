@@ -29,7 +29,7 @@ const AppLayout: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-inter">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-xl border-b border-slate-900">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-xl border-b border-slate-900 neon-header-border">
         <div className="px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -84,7 +84,7 @@ const AppLayout: React.FC = () => {
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-bold text-sm uppercase tracking-wider ${
                   active
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                    ? 'bg-blue-600 text-white shadow-lg neon-nav-active'
                     : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
                 }`}
               >

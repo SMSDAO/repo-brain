@@ -136,7 +136,7 @@ const AlertsPage: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
+      <div className="neon-run-blue bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">
@@ -193,8 +193,10 @@ const AlertsPage: React.FC = () => {
           filteredAlerts.map((alert) => (
             <div
               key={alert.id}
-              className={`bg-slate-900/60 border backdrop-blur-xl shadow-xl rounded-2xl p-6 transition-all ${
-                alert.resolved ? 'border-slate-800 opacity-60' : 'border-slate-800 hover:border-slate-700'
+              className={`backdrop-blur-xl shadow-xl rounded-2xl p-6 transition-all ${
+                alert.resolved
+                  ? 'bg-slate-900/60 border border-slate-800 opacity-60'
+                  : 'bg-slate-900/60 border border-slate-800 neon-run-rose aura-rose'
               }`}
             >
               <div className="flex items-start gap-4">

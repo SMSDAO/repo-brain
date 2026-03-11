@@ -35,10 +35,11 @@ require() {
   fi
 }
 
-# The 15-Phase MERMEDA Pipeline
+# The 19-Phase MERMEDA Pipeline
 SCRIPTS=(
   brain.detect.sh
   brain.scan-actions.sh
+  brain.deps.sh
   brain.frameworks.sh
   brain.frameworks.ci.sh
   brain.solidity.detect.sh
@@ -50,8 +51,11 @@ SCRIPTS=(
   brain.fix.safe.sh
   brain.verify.sh
   brain.ai.guard.sh
+  brain.classify.sh
+  brain.branch-protect.sh
   brain.greenlock.sh
   brain.guard.sh
+  brain.docs.sh
   brain.fleet.sh
 )
 
