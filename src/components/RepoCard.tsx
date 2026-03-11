@@ -80,12 +80,12 @@ const RepoCard: React.FC<Props> = ({ repo, onViewLogs, onViewAutopsy, onOpenActi
 
   const getPhaseColor = (status: PhaseState) => {
     switch (status) {
-      case 'SUCCESS': return 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.2)]';
-      case 'FAILED': return 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)] animate-pulse';
-      case 'RUNNING': return 'bg-blue-500 animate-pulse';
+      case 'SUCCESS': return 'bg-emerald-500 neon-phase-success';
+      case 'FAILED':  return 'bg-rose-500 neon-phase-failed animate-pulse';
+      case 'RUNNING': return 'bg-blue-500 neon-phase-running animate-pulse';
       case 'SKIPPED': return 'bg-slate-700';
       case 'PENDING': return 'bg-slate-800 border border-slate-700';
-      default: return 'bg-slate-800';
+      default:        return 'bg-slate-800';
     }
   };
 
@@ -101,7 +101,13 @@ const RepoCard: React.FC<Props> = ({ repo, onViewLogs, onViewAutopsy, onOpenActi
   const scoreColor = score > 80 ? 'text-emerald-500' : score > 50 ? 'text-amber-500' : 'text-rose-500';
 
   return (
-    <div className={`group bg-slate-900/40 border ${repo.status === 'RED' ? 'border-rose-500/40 bg-rose-500/[0.03]' : 'border-slate-800/80'} rounded-[1.25rem] sm:rounded-[2rem] p-4 sm:p-6 md:p-8 hover:border-blue-500/40 hover:bg-slate-900/60 transition-all duration-500 flex flex-col shadow-2xl relative overflow-hidden h-full`}>
+    <div className={`group bg-slate-900/40 border rounded-[1.25rem] sm:rounded-[2rem] p-4 sm:p-6 md:p-8 transition-all duration-500 flex flex-col shadow-2xl relative overflow-hidden h-full
+      ${repo.status === 'RED'
+        ? 'border-rose-500/40 bg-rose-500/[0.03] neon-run-rose aura-rose'
+        : repo.status === 'AUTO_FIXABLE'
+        ? 'border-amber-500/30 neon-run-amber aura-amber hover:border-amber-500/50'
+        : 'border-slate-800/80 neon-run-green aura-green hover:border-emerald-500/30'
+      } hover:bg-slate-900/60`}>
       <div className={`absolute top-0 right-0 w-24 sm:w-48 h-24 sm:h-48 ${repo.status === 'RED' ? 'bg-rose-500/10' : 'bg-blue-500/5'} blur-[40px] sm:blur-[60px] pointer-events-none transition-colors duration-1000`}></div>
       
       <div className="flex justify-between items-start mb-4 md:mb-6 gap-3 sm:gap-4">
@@ -139,7 +145,7 @@ const RepoCard: React.FC<Props> = ({ repo, onViewLogs, onViewAutopsy, onOpenActi
 
       <div className="mb-4">
         <div className="w-full bg-slate-800 h-1 md:h-1.5 rounded-full overflow-hidden mb-1 sm:mb-1.5">
-          <div className={`h-full ${score > 80 ? 'bg-emerald-500' : score > 50 ? 'bg-amber-500' : 'bg-rose-500'} transition-all duration-1000`} style={{ width: `${score}%` }}></div>
+          <div className={`h-full transition-all duration-1000 ${score > 80 ? 'neon-bar-green' : score > 50 ? 'neon-bar-amber' : 'neon-bar-rose'}`} style={{ width: `${score}%` }}></div>
         </div>
         <div className="flex justify-between text-[7px] sm:text-[8px] font-black text-slate-500 uppercase tracking-widest">
           <span>Health Index</span>
@@ -201,7 +207,7 @@ const RepoCard: React.FC<Props> = ({ repo, onViewLogs, onViewAutopsy, onOpenActi
             <button 
               onClick={handleCreatePR}
               disabled={prLoading}
-              className={`col-span-2 px-3 sm:px-4 py-2.5 sm:py-3 ${prLoading ? 'bg-slate-800 text-slate-500' : 'bg-blue-600 hover:bg-blue-500 text-white'} text-[8px] sm:text-[9px] md:text-[10px] font-black uppercase tracking-widest rounded-lg sm:rounded-xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 md:gap-3`}
+              className={`col-span-2 neon-btn px-3 sm:px-4 py-2.5 sm:py-3 ${prLoading ? 'bg-slate-800 text-slate-500' : 'bg-blue-600 hover:bg-blue-500 text-white neon-glow-blue'} text-[8px] sm:text-[9px] md:text-[10px] font-black uppercase tracking-widest rounded-lg sm:rounded-xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 md:gap-3`}
             >
               {prLoading ? (
                 <>

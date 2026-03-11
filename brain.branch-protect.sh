@@ -101,11 +101,12 @@ http_status=$(curl -s -o /tmp/bp_response.json -w "%{http_code}" \
 
 if [ "$http_status" = "200" ]; then
   log "✅ Branch protection successfully applied to $DEFAULT_BRANCH."
-  # Update spec to mark as applied
-  tmp=$(mktemp)
-  sed 's/"applied": false/"applied": true/' "$OUT" \
-    | sed "s|\"applied_at\": null|\"applied_at\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"|" > "$tmp"
-  mv "$tmp" "$OUT"
+  # Update spec to mark as applied using jq for safe JSON manipulation
+  if command -v jq >/dev/null 2>&1; then
+    tmp=$(mktemp)
+    jq --arg ts "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+      '.applied = true | .applied_at = $ts' "$OUT" > "$tmp" && mv "$tmp" "$OUT" || rm -f "$tmp"
+  fi
 else
   log "⚠️  GitHub API returned HTTP $http_status — check $OUT for details."
   cat /tmp/bp_response.json >> "$OUT" 2>/dev/null || true

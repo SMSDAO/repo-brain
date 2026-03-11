@@ -107,7 +107,7 @@ const BrainsPage: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
+      <div className="neon-run-blue bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">
@@ -144,7 +144,7 @@ const BrainsPage: React.FC = () => {
       </div>
 
       {/* Brains Table */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-xl shadow-xl overflow-hidden">
+      <div className="neon-run-cyan neon-corners neon-scan-beam bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-xl shadow-xl overflow-hidden aura-cyan">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -174,7 +174,7 @@ const BrainsPage: React.FC = () => {
                 filteredBrains.map((brain) => (
                   <tr
                     key={brain.id}
-                    className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"
+                    className="neon-table-row border-b border-slate-800/50 transition-colors"
                   >
                     <td className="px-6 py-4">
                       <div className="font-mono text-sm font-bold text-slate-200">{brain.repo}</div>

@@ -117,7 +117,7 @@ const DashboardPage: React.FC = () => {
       {modals.workflow && selectedActionRepo && <ActionWorkflowModal repo={selectedActionRepo} onClose={() => toggleModal('workflow')} />}
 
       {/* Ticker System */}
-      <div className="mb-8 md:mb-12 glass border border-slate-800/60 rounded-xl md:rounded-[2.5rem] py-3 md:py-6 px-4 md:px-10 overflow-hidden flex items-center gap-3 sm:gap-6 shadow-2xl relative">
+      <div className="mb-8 md:mb-12 neon-run-blue neon-ticker glass border border-slate-700/50 rounded-xl md:rounded-[2.5rem] py-3 md:py-6 px-4 md:px-10 overflow-hidden flex items-center gap-3 sm:gap-6 shadow-2xl relative">
         <div className="absolute inset-0 bg-blue-500/5 pointer-events-none"></div>
         <span className="shrink-0 bg-blue-500/10 text-blue-400 text-[8px] sm:text-[9px] md:text-xs font-black uppercase border border-blue-500/30 px-2 md:px-3 py-1 md:py-1.5 rounded-full animate-pulse tracking-widest relative z-10">Oracle Feed</span>
         <div className="flex-1 font-mono text-[10px] sm:text-sm md:text-lg text-slate-400 italic truncate relative z-10">
@@ -134,7 +134,7 @@ const DashboardPage: React.FC = () => {
       {/* Analytics Dashboard Grid */}
       <section className="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-10 mb-12 md:mb-24">
         {/* Fleet Distribution Chart */}
-        <div className="xl:col-span-4 bg-slate-900/40 border border-slate-800 p-6 sm:p-8 lg:p-12 rounded-2xl md:rounded-[4rem] flex flex-col items-center justify-center shadow-2xl backdrop-blur-md min-h-[300px] md:min-h-[350px]">
+        <div className="xl:col-span-4 neon-run-green neon-corners-green aura-green bg-slate-900/40 border border-slate-800 p-6 sm:p-8 lg:p-12 rounded-2xl md:rounded-[4rem] flex flex-col items-center justify-center shadow-2xl backdrop-blur-md min-h-[300px] md:min-h-[350px]">
           <div className="h-40 sm:h-48 md:h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -149,7 +149,7 @@ const DashboardPage: React.FC = () => {
         </div>
         
         {/* Telemetry Stats */}
-        <div className="xl:col-span-8 bg-slate-900/40 border border-slate-800 p-6 sm:p-8 lg:p-16 rounded-2xl md:rounded-[4rem] flex flex-col justify-center shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="xl:col-span-8 neon-run-blue neon-scan-beam neon-scanlines bg-slate-900/40 border border-slate-800 p-6 sm:p-8 lg:p-16 rounded-2xl md:rounded-[4rem] flex flex-col justify-center shadow-2xl relative overflow-hidden backdrop-blur-md">
           <div className="absolute top-0 right-0 p-12 opacity-[0.02] select-none pointer-events-none hidden lg:block">
             <span className="text-[15rem] xl:text-[20rem] font-black italic">PULSE</span>
           </div>
@@ -161,7 +161,12 @@ const DashboardPage: React.FC = () => {
               <button 
                 key={s.label} 
                 onClick={() => setStatusFilter(s.val as any)}
-                className={`p-4 sm:p-6 lg:p-10 bg-slate-950 rounded-xl sm:rounded-[2rem] lg:rounded-[3rem] border border-slate-800 flex flex-col text-left hover:border-blue-500/40 transition-all active:scale-95 group shadow-inner ${statusFilter === s.val ? 'border-blue-500/60 bg-blue-500/5 ring-4 ring-blue-500/5' : ''}`}
+                className={`p-4 sm:p-6 lg:p-10 bg-slate-950 rounded-xl sm:rounded-[2rem] lg:rounded-[3rem] border border-slate-800 flex flex-col text-left transition-all active:scale-95 group shadow-inner
+                  ${s.label === 'Critical'  ? 'neon-run-rose  hover:border-rose-500/40'  : ''}
+                  ${s.label === 'Drift'     ? 'neon-run-amber hover:border-amber-500/40' : ''}
+                  ${s.label === 'Nominal'   ? 'neon-run-green hover:border-emerald-500/40' : ''}
+                  ${statusFilter === s.val  ? 'border-blue-500/60 bg-blue-500/5 ring-4 ring-blue-500/5' : ''}
+                `}
               >
                 <span className={`text-4xl sm:text-5xl lg:text-7xl font-black mb-1 md:mb-2 group-hover:scale-105 transition-transform ${s.color}`}>{s.count}</span>
                 <span className="text-[8px] sm:text-[10px] lg:text-xs font-black text-slate-500 uppercase tracking-widest leading-none">{s.label}</span>
@@ -184,7 +189,7 @@ const DashboardPage: React.FC = () => {
 
       {/* Grid Controller - Dynamic High-Density Filters */}
       <section className="mb-16 md:mb-24">
-        <div className="bg-slate-900/60 border border-slate-800 p-4 sm:p-6 md:p-10 rounded-2xl md:rounded-[4rem] mb-8 md:mb-12 shadow-2xl backdrop-blur-xl">
+        <div className="neon-run-blue bg-slate-900/60 border border-slate-800 p-4 sm:p-6 md:p-10 rounded-2xl md:rounded-[4rem] mb-8 md:mb-12 shadow-2xl backdrop-blur-xl">
           <div className="flex flex-col lg:flex-row gap-6 md:gap-8 items-stretch lg:items-end">
             <div className="flex-1">
               <label className="text-[8px] sm:text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-slate-600 mb-2 md:mb-3 block ml-2 md:ml-4 italic">Repo Admission Search</label>
@@ -259,7 +264,7 @@ const DashboardPage: React.FC = () => {
       </section>
 
       {/* Control Station Dashboard */}
-      <section className="mb-16 md:mb-24 bg-slate-900/40 border border-slate-800 rounded-2xl md:rounded-[5rem] p-6 sm:p-10 md:p-20 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+      <section className="mb-16 md:mb-24 neon-run-blue neon-corners neon-scanlines bg-slate-900/40 border border-slate-800 rounded-2xl md:rounded-[5rem] p-6 sm:p-10 md:p-20 backdrop-blur-2xl shadow-2xl relative overflow-hidden aura-blue">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 md:mb-16 gap-6 md:gap-10">
            <div className="flex items-center gap-4 md:gap-6">
               <div className="w-5 h-5 md:w-8 md:h-8 bg-blue-500 rounded-full animate-pulse shadow-[0_0_40px_rgba(59,130,246,1)]"></div>

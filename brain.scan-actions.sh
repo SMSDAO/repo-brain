@@ -62,6 +62,10 @@ for f in "$ROOT"/.github/workflows/*.yml; do
     # Surgical patch: insert 'permissions: contents: read' after the 'on:' block
     # Only patch if this is not a file we already own (avoid double-patching)
     if ! grep -q "# brain-hardened" "$f" 2>/dev/null; then
+      # NOTE: the '# brain-hardened' marker at the end of the file prevents
+      # this script from patching the same workflow twice. Manually removing
+      # that marker will cause this script to re-apply the permissions block
+      # on the next run — which is safe to do if the block was removed.
       tmpfile=$(mktemp)
       awk '
         /^on:/ { print; in_on=1; next }
