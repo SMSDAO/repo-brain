@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'operator' | 'viewer';
+export type UserRole = 'admin' | 'developer' | 'user' | 'auditor' | 'operator' | 'viewer';
 
 export type BrainStatus = 'green' | 'auto_fixable' | 'red';
 
