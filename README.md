@@ -74,18 +74,38 @@ Whether you manage **1 repo or 500**, repo‑brain enforces invariants, fixes br
 
 **⚠️ IMPORTANT**: Change this password immediately after first login!
 
+### Navigation
+
+| Tab | Path | Access |
+|-----|------|--------|
+| Home | `/` | All users |
+| Dashboard | `/dashboard` | All users |
+| Users | `/users` | Admin only |
+| Admin | `/admin/overview` | Admin only |
+| Developer | `/developer` | Admin + Developer |
+| Settings | `/settings` | All users |
+| Docs | `/docs` | All users |
+
 ### Admin Features
 - **Overview** (`/admin/overview`): Fleet metrics, alert summaries, activity timeline
 - **Brains** (`/admin/brains`): Repository management, status tracking, trigger scans
 - **Alerts** (`/admin/alerts`): Security findings, vulnerabilities, mark as resolved
-- **Settings** (`/admin/settings`): Configuration view, environment status
+- **Config** (`/admin/settings`): Configuration view, environment status
+- **Users** (`/users`): User management, role assignment
 
-### Role-Based Access
-- **admin**: Full access to all features
-- **operator**: View and operate on repos
-- **viewer**: Read-only access
+### Role-Based Access Control (RBAC)
 
-Configure roles in Supabase `users` table.
+| Role | Level | Access |
+|------|-------|--------|
+| `admin` | 5 | Full platform access |
+| `developer` | 4 | Developer console, API monitoring |
+| `operator` | 3 | Brain scans, CI triggers |
+| `auditor` | 2 | Read-only audit logs and alerts |
+| `user` / `viewer` | 1 | Dashboard and settings |
+
+Configure roles in the **Users** page (`/users`) or directly in the Supabase `users` table.
+
+See [Admin Guide](docs/admin-guide.md) for detailed instructions.
 
 ---
 
