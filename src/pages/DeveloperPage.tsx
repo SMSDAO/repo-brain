@@ -25,15 +25,21 @@ const DeveloperPage: React.FC = () => {
 
   const fetchData = async () => {
     setLoading(true);
+    setError(null);
     try {
       const [brainsRes, runsRes] = await Promise.all([
         supabase.from('brains').select('*').order('created_at', { ascending: false }).limit(10),
         supabase.from('runs').select('*').order('started_at', { ascending: false }).limit(20),
       ]);
-      if (brainsRes.data) setBrains(brainsRes.data);
-      if (runsRes.data) setRuns(runsRes.data);
+
+      if (brainsRes.error) throw brainsRes.error;
+      if (runsRes.error) throw runsRes.error;
+
+      setBrains(brainsRes.data || []);
+      setRuns(runsRes.data || []);
     } catch (err) {
       console.error('Failed to fetch developer data', err);
+      setError('Failed to load data. Check your connection and permissions.');
     } finally {
       setLoading(false);
     }
