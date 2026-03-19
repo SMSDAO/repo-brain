@@ -4,11 +4,16 @@ import { AuthProvider } from './contexts/AuthContext';
 import AppLayout from './layouts/AppLayout';
 import AuthLayout from './layouts/AuthLayout';
 import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+import UsersPage from './pages/UsersPage';
+import DeveloperPage from './pages/DeveloperPage';
+import SettingsPage from './pages/SettingsPage';
+import DocsPage from './pages/DocsPage';
 import OverviewPage from './pages/admin/OverviewPage';
 import BrainsPage from './pages/admin/BrainsPage';
 import AlertsPage from './pages/admin/AlertsPage';
-import SettingsPage from './pages/admin/SettingsPage';
+import AdminSettingsPage from './pages/admin/SettingsPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode; requireAdmin?: boolean }> = ({ 
@@ -43,12 +48,51 @@ const App: React.FC = () => {
 
           {/* Protected routes */}
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
                   <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <UsersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/developer"
+              element={
+                <ProtectedRoute>
+                  <DeveloperPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <SettingsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/docs"
+              element={
+                <ProtectedRoute>
+                  <DocsPage />
                 </ProtectedRoute>
               }
             />
@@ -83,7 +127,7 @@ const App: React.FC = () => {
               path="/admin/settings"
               element={
                 <ProtectedRoute requireAdmin>
-                  <SettingsPage />
+                  <AdminSettingsPage />
                 </ProtectedRoute>
               }
             />

@@ -14,6 +14,8 @@ interface AuthContextType {
   hasRole: (role: UserRole) => boolean;
   isAdmin: boolean;
   isOperator: boolean;
+  isDeveloper: boolean;
+  isAuditor: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -146,16 +148,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!userProfile) return false;
     
     const roleHierarchy: Record<UserRole, number> = {
-      admin: 3,
-      operator: 2,
+      admin: 5,
+      developer: 4,
+      operator: 3,
+      auditor: 2,
+      user: 1,
       viewer: 1,
     };
     
-    return roleHierarchy[userProfile.role] >= roleHierarchy[role];
+    return (roleHierarchy[userProfile.role] ?? 0) >= (roleHierarchy[role] ?? 0);
   };
 
   const isAdmin = hasRole('admin');
   const isOperator = hasRole('operator');
+  const isDeveloper = hasRole('developer');
+  const isAuditor = hasRole('auditor');
 
   const value: AuthContextType = {
     user,
@@ -168,6 +175,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     hasRole,
     isAdmin,
     isOperator,
+    isDeveloper,
+    isAuditor,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

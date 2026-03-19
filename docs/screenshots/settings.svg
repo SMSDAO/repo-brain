@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <!-- Background -->
+  <rect width="1280" height="800" fill="#020617"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="256" height="800" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <rect x="20" y="18" width="32" height="32" rx="8" fill="#2563eb"/>
+  <text x="28" y="40" fill="white" font-size="16">🧠</text>
+  <text x="62" y="33" fill="white" font-size="13" font-weight="bold">repo-brain</text>
+  <text x="62" y="47" fill="#475569" font-size="10">HOSPITAL v2.3</text>
+  <line x1="16" y1="68" x2="240" y2="68" stroke="#1e293b" stroke-width="1"/>
+  <text x="48" y="99" fill="#64748b" font-size="12">Home</text>
+  <text x="48" y="143" fill="#64748b" font-size="12">Dashboard</text>
+  <text x="48" y="187" fill="#64748b" font-size="12">Users</text>
+  <text x="48" y="231" fill="#64748b" font-size="12">Admin</text>
+  <text x="48" y="275" fill="#64748b" font-size="12">Developer</text>
+  <!-- Settings (active) -->
+  <rect x="12" y="296" width="232" height="36" rx="8" fill="#1e3a5f"/>
+  <rect x="12" y="296" width="3" height="36" rx="2" fill="#3b82f6"/>
+  <text x="48" y="319" fill="#93c5fd" font-size="12" font-weight="600">Settings</text>
+  <text x="48" y="363" fill="#64748b" font-size="12">Docs</text>
+
+  <!-- Top bar -->
+  <rect x="256" y="0" width="1024" height="64" fill="#0f172a"/>
+  <line x1="256" y1="64" x2="1280" y2="64" stroke="#1e293b" stroke-width="1"/>
+  <text x="280" y="38" fill="white" font-size="18" font-weight="900" letter-spacing="2">SETTINGS</text>
+  <text x="280" y="52" fill="#475569" font-size="11">Configure your account and preferences</text>
+
+  <!-- Tabs -->
+  <text x="284" y="96" fill="#3b82f6" font-size="12" font-weight="600">👤 Profile</text>
+  <rect x="272" y="104" width="88" height="2" fill="#3b82f6" rx="1"/>
+  <text x="380" y="96" fill="#64748b" font-size="12">🔔 Notifications</text>
+  <text x="516" y="96" fill="#64748b" font-size="12">🔒 Security</text>
+  <text x="612" y="96" fill="#64748b" font-size="12">🌐 Appearance</text>
+  <line x1="272" y1="108" x2="1284" y2="108" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Settings card -->
+  <rect x="272" y="124" width="992" height="420" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Profile section -->
+  <text x="296" y="160" fill="white" font-size="14" font-weight="bold">👤  Profile</text>
+
+  <!-- Display Name -->
+  <text x="296" y="190" fill="#64748b" font-size="10" letter-spacing="1">DISPLAY NAME</text>
+  <rect x="296" y="198" width="400" height="40" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="312" y="223" fill="#94a3b8" font-size="13">admin</text>
+  <!-- cursor blink -->
+  <rect x="356" y="209" width="2" height="18" fill="#3b82f6" rx="1"/>
+
+  <!-- Email -->
+  <text x="296" y="258" fill="#64748b" font-size="10" letter-spacing="1">EMAIL</text>
+  <rect x="296" y="266" width="400" height="40" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="312" y="291" fill="#475569" font-size="13">admin@admin.com</text>
+  <text x="700" y="291" fill="#334155" font-size="11">🔒</text>
+
+  <!-- Role -->
+  <text x="296" y="326" fill="#64748b" font-size="10" letter-spacing="1">ROLE</text>
+  <rect x="296" y="334" width="400" height="40" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <rect x="312" y="344" width="56" height="20" rx="10" fill="rgba(239,68,68,0.15)"/>
+  <text x="324" y="359" fill="#fca5a5" font-size="11" font-weight="bold">admin</text>
+
+  <!-- Divider -->
+  <line x1="288" y1="396" x2="1248" y2="396" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Save button -->
+  <rect x="1140" y="412" width="108" height="36" rx="8">
+    <defs>
+      <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#2563eb"/>
+        <stop offset="100%" style="stop-color:#4f46e5"/>
+      </linearGradient>
+    </defs>
+    <rect x="1140" y="412" width="108" height="36" rx="8" fill="url(#btnGrad)"/>
+  </rect>
+  <rect x="1140" y="412" width="108" height="36" rx="8" fill="#2563eb"/>
+  <text x="1166" y="435" fill="white" font-size="13" font-weight="bold">💾 Save</text>
+
+  <!-- Notification preview (right side) -->
+  <rect x="736" y="140" width="512" height="380" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="760" y="174" fill="#94a3b8" font-size="13" font-weight="bold">🔔  Notification Preview</text>
+  <line x1="748" y1="185" x2="1236" y2="185" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Toggle items -->
+  <text x="760" y="218" fill="#94a3b8" font-size="13">Security Alerts</text>
+  <text x="760" y="234" fill="#475569" font-size="11">Critical vulnerability notifications</text>
+  <rect x="1160" y="208" width="40" height="20" rx="10" fill="#2563eb"/>
+  <circle cx="1188" cy="218" r="8" fill="white"/>
+
+  <text x="760" y="272" fill="#94a3b8" font-size="13">Run Completions</text>
+  <text x="760" y="288" fill="#475569" font-size="11">Notify when brain runs finish</text>
+  <rect x="1160" y="262" width="40" height="20" rx="10" fill="#334155"/>
+  <circle cx="1168" cy="272" r="8" fill="white"/>
+
+  <text x="760" y="326" fill="#94a3b8" font-size="13">System Updates</text>
+  <text x="760" y="342" fill="#475569" font-size="11">Announcements and maintenance</text>
+  <rect x="1160" y="316" width="40" height="20" rx="10" fill="#2563eb"/>
+  <circle cx="1188" cy="326" r="8" fill="white"/>
+</svg>
