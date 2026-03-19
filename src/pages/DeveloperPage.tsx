@@ -15,6 +15,7 @@ const DeveloperPage: React.FC = () => {
     '> Loading API monitoring data...',
     '> Connecting to telemetry endpoint...',
   ]);
+  const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'api' | 'logs' | 'env' | 'deploy'>('api');
 
   useEffect(() => {
@@ -85,6 +86,14 @@ const DeveloperPage: React.FC = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+      {/* Error banner */}
+      {error && (
+        <div className="flex items-center gap-3 px-4 py-3 bg-red-900/20 border border-red-800/40 rounded-xl text-sm text-red-400">
+          <AlertTriangle size={16} className="shrink-0" />
+          {error}
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <!-- Background -->
+  <rect width="1280" height="800" fill="#020617"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="256" height="800" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="62" y="33" fill="white" font-size="13" font-weight="bold">repo-brain</text>
+  <text x="62" y="47" fill="#475569" font-size="10">HOSPITAL v2.3</text>
+  <rect x="20" y="18" width="32" height="32" rx="8" fill="#2563eb"/>
+  <text x="28" y="40" fill="white" font-size="16">🧠</text>
+  <line x1="16" y1="68" x2="240" y2="68" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Nav items - Developer active -->
+  <rect x="12" y="76" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="99" fill="#64748b" font-size="12">Home</text>
+  <rect x="12" y="120" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="143" fill="#64748b" font-size="12">Dashboard</text>
+  <rect x="12" y="164" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="187" fill="#64748b" font-size="12">Users</text>
+  <rect x="12" y="208" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="231" fill="#64748b" font-size="12">Admin</text>
+
+  <!-- Developer (active) -->
+  <rect x="12" y="252" width="232" height="36" rx="8" fill="#1e3a5f"/>
+  <rect x="12" y="252" width="3" height="36" rx="2" fill="#3b82f6"/>
+  <text x="48" y="275" fill="#93c5fd" font-size="12" font-weight="600">Developer</text>
+
+  <rect x="12" y="296" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="319" fill="#64748b" font-size="12">Settings</text>
+  <rect x="12" y="340" width="232" height="36" rx="8" fill="transparent"/>
+  <text x="48" y="363" fill="#64748b" font-size="12">Docs</text>
+
+  <!-- Top bar -->
+  <rect x="256" y="0" width="1024" height="64" fill="#0f172a"/>
+  <line x1="256" y1="64" x2="1280" y2="64" stroke="#1e293b" stroke-width="1"/>
+  <text x="280" y="38" fill="white" font-size="18" font-weight="900" letter-spacing="2">DEVELOPER CONSOLE</text>
+  <rect x="1150" y="18" width="108" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="1175" y="37" fill="#94a3b8" font-size="12">⟳ Refresh</text>
+
+  <!-- Stats -->
+  <rect x="272" y="80" width="228" height="80" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="290" y="106" fill="#64748b" font-size="10" letter-spacing="1">ACTIVE BRAINS</text>
+  <text x="290" y="144" fill="#3b82f6" font-size="32" font-weight="900">12</text>
+
+  <rect x="516" y="80" width="228" height="80" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="534" y="106" fill="#64748b" font-size="10" letter-spacing="1">TOTAL RUNS</text>
+  <text x="534" y="144" fill="#10b981" font-size="32" font-weight="900">87</text>
+
+  <rect x="760" y="80" width="228" height="80" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="778" y="106" fill="#64748b" font-size="10" letter-spacing="1">SUCCESS RATE</text>
+  <text x="778" y="144" fill="#22c55e" font-size="32" font-weight="900">96%</text>
+
+  <rect x="1004" y="80" width="228" height="80" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="1022" y="106" fill="#64748b" font-size="10" letter-spacing="1">FAILED RUNS</text>
+  <text x="1022" y="144" fill="#ef4444" font-size="32" font-weight="900">3</text>
+
+  <!-- Tabs -->
+  <rect x="272" y="176" width="1012" height="40" fill="transparent"/>
+  <text x="284" y="201" fill="#3b82f6" font-size="12" font-weight="600">API Monitor</text>
+  <rect x="272" y="212" width="100" height="2" rx="1" fill="#3b82f6"/>
+  <text x="394" y="201" fill="#64748b" font-size="12">Log Viewer</text>
+  <text x="490" y="201" fill="#64748b" font-size="12">Environment</text>
+  <text x="596" y="201" fill="#64748b" font-size="12">Deployment</text>
+  <line x1="272" y1="216" x2="1284" y2="216" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- API Monitor Table -->
+  <rect x="272" y="228" width="992" height="320" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Table header -->
+  <rect x="272" y="228" width="992" height="40" rx="12" fill="#1e293b"/>
+  <rect x="272" y="248" width="992" height="20" fill="#1e293b"/>
+  <text x="292" y="254" fill="white" font-size="12" font-weight="bold">⚡ API Endpoints</text>
+
+  <!-- Rows -->
+  <rect x="288" y="276" width="960" height="36" rx="6" fill="#0f2027"/>
+  <rect x="296" y="284" width="36" height="20" rx="4" fill="rgba(59,130,246,0.2)"/>
+  <text x="304" y="298" fill="#60a5fa" font-size="11" font-weight="bold">GET</text>
+  <text x="344" y="298" fill="#94a3b8" font-size="12">/rest/v1/brains</text>
+  <text x="950" y="298" fill="#64748b" font-size="12">38ms</text>
+  <text x="1200" y="298" fill="#22c55e" font-size="12" font-weight="bold">200</text>
+
+  <rect x="288" y="320" width="960" height="36" rx="6" fill="transparent"/>
+  <rect x="296" y="328" width="36" height="20" rx="4" fill="rgba(59,130,246,0.2)"/>
+  <text x="304" y="342" fill="#60a5fa" font-size="11" font-weight="bold">GET</text>
+  <text x="344" y="342" fill="#94a3b8" font-size="12">/rest/v1/alerts</text>
+  <text x="950" y="342" fill="#64748b" font-size="12">42ms</text>
+  <text x="1200" y="342" fill="#22c55e" font-size="12" font-weight="bold">200</text>
+
+  <rect x="288" y="364" width="960" height="36" rx="6" fill="transparent"/>
+  <rect x="296" y="372" width="42" height="20" rx="4" fill="rgba(16,185,129,0.2)"/>
+  <text x="302" y="386" fill="#34d399" font-size="11" font-weight="bold">POST</text>
+  <text x="352" y="386" fill="#94a3b8" font-size="12">/rest/v1/runs</text>
+  <text x="950" y="386" fill="#64748b" font-size="12">95ms</text>
+  <text x="1192" y="386" fill="#22c55e" font-size="12" font-weight="bold">201</text>
+
+  <rect x="288" y="408" width="960" height="36" rx="6" fill="transparent"/>
+  <rect x="296" y="416" width="36" height="20" rx="4" fill="rgba(59,130,246,0.2)"/>
+  <text x="304" y="430" fill="#60a5fa" font-size="11" font-weight="bold">GET</text>
+  <text x="344" y="430" fill="#94a3b8" font-size="12">/rest/v1/users</text>
+  <text x="950" y="430" fill="#64748b" font-size="12">31ms</text>
+  <text x="1200" y="430" fill="#22c55e" font-size="12" font-weight="bold">200</text>
+
+  <rect x="288" y="452" width="960" height="36" rx="6" fill="transparent"/>
+  <rect x="296" y="460" width="52" height="20" rx="4" fill="rgba(245,158,11,0.2)"/>
+  <text x="300" y="474" fill="#fbbf24" font-size="11" font-weight="bold">PATCH</text>
+  <text x="360" y="474" fill="#94a3b8" font-size="12">/rest/v1/brains?id=eq.*</text>
+  <text x="950" y="474" fill="#64748b" font-size="12">55ms</text>
+  <text x="1200" y="474" fill="#22c55e" font-size="12" font-weight="bold">200</text>
+
+  <!-- Log preview -->
+  <rect x="272" y="564" width="992" height="120" rx="12" fill="#020617" stroke="#1e293b" stroke-width="1"/>
+  <rect x="272" y="564" width="992" height="36" rx="12" fill="#0f172a"/>
+  <rect x="272" y="580" width="992" height="20" fill="#0f172a"/>
+  <circle cx="296" cy="582" r="5" fill="#22c55e"/>
+  <circle cx="296" cy="582" r="4" fill="#22c55e" opacity="0.5">
+    <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="308" y="587" fill="#64748b" font-size="11">LIVE LOG STREAM</text>
+  <text x="1220" y="587" fill="#22c55e" font-size="10" font-weight="bold">● LIVE</text>
+
+  <text x="292" y="620" fill="#22c55e" font-size="11">[2026-03-17T01:49:12Z] INFO  Health check passed — 200 OK</text>
+  <text x="292" y="638" fill="#64748b" font-size="11">[2026-03-17T01:49:08Z] DEBUG Brain scan triggered for queue entry #743</text>
+  <text x="292" y="656" fill="#fbbf24" font-size="11">[2026-03-17T01:49:04Z] WARN  Rate limit: 92% threshold reached on /api/scan</text>
+  <text x="292" y="674" fill="#22c55e" font-size="11">[2026-03-17T01:49:00Z] INFO  Supabase query completed in 38ms</text>
+</svg>

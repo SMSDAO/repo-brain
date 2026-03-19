@@ -186,27 +186,45 @@ SELECT id, email, 'admin' FROM auth.users WHERE email = 'admin@admin.com';
 
 ## 📸 Screenshots
 
-### Landing / Main Dashboard
+### 🏠 Home Page
+![Home Page](docs/screenshots/home.svg)
+*Enterprise landing page — feature overview, live status banner, and role-aware quick-actions*
+
+### 📊 Admin Dashboard
 ![Dashboard](docs/screenshots/dashboard.png)
 *Fleet monitoring dashboard with real-time status tracking*
 
-### Brain Status View
+### 🧠 Brain Status View
 ![Brain Status](docs/screenshots/brains.png)
 *Repository health monitoring and management*
 
-### Admin Overview
+### 🔔 Admin Overview
 ![Admin Overview](docs/screenshots/admin-overview.png)
-*Admin dashboard with fleet metrics and alerts*
+*Admin dashboard with fleet metrics and alert summaries*
 
-### Alerts List
+### ⚠️ Alerts List
 ![Alerts](docs/screenshots/alerts.png)
 *Security findings and vulnerability tracking*
 
-### Login Screen
+### 👥 Users Management
+![Users Management](docs/screenshots/users-management.svg)
+*Admin-only user management with inline role assignment, search, and filter*
 
-**Note**: Screenshots are in `docs/screenshots/`. Add your own screenshots by replacing the placeholder images.
+### 💻 Developer Console
+![Developer Console](docs/screenshots/developer-console.svg)
+*API monitor, live log stream, environment inspector, and deployment diagnostics*
+
+### ⚙️ Settings
+![Settings](docs/screenshots/settings.svg)
+*Profile, notifications, security (password reset), and appearance preferences*
+
+### 📚 Documentation Hub
+![Docs Hub](docs/screenshots/docs-hub.svg)
+*Searchable documentation hub linking to GitHub-hosted guides*
+
+### 🔐 Login Screen
 ![Login](docs/screenshots/login.png)
-*Secure authentication with Supabase*
+*Secure Supabase authentication with role-based redirect*
 
 ---
 

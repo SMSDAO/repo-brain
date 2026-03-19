@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Settings, Bell, Shield, User, Key, Globe, Save, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Settings, Bell, Shield, User, Key, Globe, Save, Check, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useRequireAuth } from '../hooks/useRequireAuth';
+import { supabase } from '../lib/supabaseClient';
 
 const SettingsPage: React.FC = () => {
   useRequireAuth();
@@ -9,6 +10,8 @@ const SettingsPage: React.FC = () => {
   const { userProfile } = useAuth();
   const [saved, setSaved] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'notifications' | 'security' | 'appearance'>('profile');
+  const [resetSent, setResetSent] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     displayName: userProfile?.email?.split('@')[0] ?? '',
@@ -19,6 +22,17 @@ const SettingsPage: React.FC = () => {
     theme: 'dark',
     language: 'en',
   });
+
+  // Sync form fields when userProfile is loaded asynchronously
+  useEffect(() => {
+    if (userProfile) {
+      setForm(f => ({
+        ...f,
+        displayName: userProfile.email?.split('@')[0] ?? f.displayName,
+        email: userProfile.email ?? f.email,
+      }));
+    }
+  }, [userProfile]);
 
   const handleSave = () => {
     setSaved(true);
@@ -136,8 +150,35 @@ const SettingsPage: React.FC = () => {
               <div className="bg-blue-900/10 border border-blue-800/30 rounded-lg p-4 text-sm text-blue-400">
                 Password changes are managed securely through Supabase Auth. Use the link below to reset your password.
               </div>
-              <button className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm text-slate-300 font-mono transition-colors">
-                Send Password Reset Email
+              {resetError && (
+                <div className="flex items-center gap-2 px-4 py-3 bg-red-900/20 border border-red-800/40 rounded-lg text-sm text-red-400">
+                  <AlertTriangle size={14} className="shrink-0" />
+                  {resetError}
+                </div>
+              )}
+              <button
+                onClick={async () => {
+                  setResetError(null);
+                  if (!userProfile?.email) return;
+                  const { error } = await supabase.auth.resetPasswordForEmail(userProfile.email, {
+                    redirectTo: `${window.location.origin}/settings`,
+                  });
+                  if (error) {
+                    setResetError(error.message);
+                  } else {
+                    setResetSent(true);
+                    setTimeout(() => setResetSent(false), 4000);
+                  }
+                }}
+                disabled={resetSent}
+                className={`flex items-center gap-2 px-4 py-2 border rounded-lg text-sm font-mono transition-colors ${
+                  resetSent
+                    ? 'bg-emerald-900/20 border-emerald-800/40 text-emerald-400 cursor-default'
+                    : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-300'
+                }`}
+              >
+                {resetSent ? <Check size={14} /> : <Key size={14} />}
+                {resetSent ? 'Reset email sent!' : 'Send Password Reset Email'}
               </button>
               <div className="pt-4 border-t border-slate-800">
                 <h3 className="text-white text-sm font-bold mb-3">Active Sessions</h3>

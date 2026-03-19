@@ -10,6 +10,8 @@ interface DocSection {
   articles: { title: string; path: string }[];
 }
 
+const REPO = 'https://github.com/SMSDAO/repo-brain/blob/main';
+
 const sections: DocSection[] = [
   {
     id: 'architecture',
@@ -18,10 +20,10 @@ const sections: DocSection[] = [
     color: 'from-blue-600 to-indigo-600',
     description: 'System design, module relationships, and data flow.',
     articles: [
-      { title: 'System Overview', path: '/docs/architecture' },
-      { title: 'MERMEDA Protocol', path: '/docs/mermeda' },
-      { title: 'Database Schema', path: '/docs/database' },
-      { title: 'Brain Scripts Pipeline', path: '/docs/pipeline' },
+      { title: 'System Overview', path: `${REPO}/docs/architecture.md` },
+      { title: 'MERMEDA Protocol', path: `${REPO}/docs/MERMEDA.md` },
+      { title: 'Database Schema', path: `${REPO}/src/lib/supabase-schema.sql` },
+      { title: 'Brain Scripts Pipeline', path: `${REPO}/docs/pipeline.md` },
     ],
   },
   {
@@ -31,10 +33,10 @@ const sections: DocSection[] = [
     color: 'from-emerald-600 to-teal-600',
     description: 'Deploy to Vercel, configure environment variables, and manage releases.',
     articles: [
-      { title: 'Vercel Deployment', path: '/docs/deployment' },
-      { title: 'Environment Variables', path: '/docs/env' },
-      { title: 'CI/CD Pipelines', path: '/docs/cicd' },
-      { title: 'Release Management', path: '/docs/releases' },
+      { title: 'Vercel Deployment', path: `${REPO}/vercel.json` },
+      { title: 'Environment Variables', path: `${REPO}/.env.example` },
+      { title: 'CI/CD Pipelines', path: `${REPO}/docs/developer-guide.md` },
+      { title: 'Release Management', path: `${REPO}/CHANGELOG.md` },
     ],
   },
   {
@@ -44,10 +46,10 @@ const sections: DocSection[] = [
     color: 'from-purple-600 to-pink-600',
     description: 'How to use the dashboard, run brain scans, and interpret results.',
     articles: [
-      { title: 'Getting Started', path: '/docs/quickstart' },
-      { title: 'Dashboard Overview', path: '/docs/dashboard' },
-      { title: 'Running Brain Scans', path: '/docs/scans' },
-      { title: 'Alerts & Reports', path: '/docs/alerts' },
+      { title: 'Getting Started', path: `${REPO}/README.md` },
+      { title: 'Dashboard Overview', path: `${REPO}/docs/USER_GUIDE.md` },
+      { title: 'Running Brain Scans', path: `${REPO}/docs/USER_GUIDE.md` },
+      { title: 'Alerts & Reports', path: `${REPO}/docs/USER_GUIDE.md` },
     ],
   },
   {
@@ -57,10 +59,10 @@ const sections: DocSection[] = [
     color: 'from-red-600 to-rose-600',
     description: 'User management, role assignment, and system configuration.',
     articles: [
-      { title: 'User Management', path: '/docs/users' },
-      { title: 'Role & Permissions', path: '/docs/rbac' },
-      { title: 'Audit Logs', path: '/docs/audit' },
-      { title: 'System Configuration', path: '/docs/config' },
+      { title: 'User Management', path: `${REPO}/docs/admin-guide.md` },
+      { title: 'Role & Permissions', path: `${REPO}/docs/admin-guide.md` },
+      { title: 'Audit Logs', path: `${REPO}/docs/admin-guide.md` },
+      { title: 'System Configuration', path: `${REPO}/docs/admin-guide.md` },
     ],
   },
   {
@@ -70,10 +72,10 @@ const sections: DocSection[] = [
     color: 'from-amber-500 to-orange-600',
     description: 'API reference, brain script development, and integration testing.',
     articles: [
-      { title: 'CLI Reference', path: '/docs/cli' },
-      { title: 'Brain Script API', path: '/docs/brain-api' },
-      { title: 'REST API Reference', path: '/docs/rest-api' },
-      { title: 'Integration Testing', path: '/docs/testing' },
+      { title: 'CLI Reference', path: `${REPO}/docs/cli.md` },
+      { title: 'Brain Script API', path: `${REPO}/docs/developer-guide.md` },
+      { title: 'REST API Reference', path: `${REPO}/docs/developer-guide.md` },
+      { title: 'Integration Testing', path: `${REPO}/docs/developer-guide.md` },
     ],
   },
   {
@@ -83,10 +85,10 @@ const sections: DocSection[] = [
     color: 'from-cyan-600 to-blue-600',
     description: 'Security posture, RBAC enforcement, and hardening guidelines.',
     articles: [
-      { title: 'Security Overview', path: '/docs/security' },
-      { title: 'Secret Management', path: '/docs/secrets' },
-      { title: 'Rate Limiting', path: '/docs/rate-limiting' },
-      { title: 'Incident Response', path: '/docs/incidents' },
+      { title: 'Security Overview', path: `${REPO}/docs/SPECS.md` },
+      { title: 'Secret Management', path: `${REPO}/docs/SPECS.md` },
+      { title: 'Rate Limiting', path: `${REPO}/docs/SPECS.md` },
+      { title: 'Incident Response', path: `${REPO}/docs/SPECS.md` },
     ],
   },
 ];
@@ -153,6 +155,8 @@ const DocsPage: React.FC = () => {
                     <a
                       key={article.title}
                       href={article.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center justify-between px-5 py-3 text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors group"
                     >
                       <span className="flex items-center gap-2">
@@ -174,14 +178,16 @@ const DocsPage: React.FC = () => {
         <h3 className="text-white font-bold mb-4">Quick References</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: 'README', href: '/README.md', icon: '📄' },
-            { label: 'CHANGELOG', href: '/CHANGELOG.md', icon: '📝' },
-            { label: 'Architecture', href: '/ARCHITECTURE.md', icon: '🏗️' },
-            { label: 'UI/UX Guide', href: '/UIUX.md', icon: '🎨' },
+            { label: 'README', href: `${REPO}/README.md`, icon: '📄' },
+            { label: 'CHANGELOG', href: `${REPO}/CHANGELOG.md`, icon: '📝' },
+            { label: 'Architecture', href: `${REPO}/docs/architecture.md`, icon: '🏗️' },
+            { label: 'UI/UX Guide', href: `${REPO}/docs/ui-ux.md`, icon: '🎨' },
           ].map((link) => (
             <a
               key={link.label}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-3 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-slate-600 rounded-lg text-xs text-slate-400 hover:text-white transition-all"
             >
               <span>{link.icon}</span>

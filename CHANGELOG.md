@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] — 2026-03-14
+## [2.3.0] — 2026-03-14
 
 ### Added
 
@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **isDeveloper / isAuditor** — New boolean flags exposed from `AuthContext` for role-gated UI
 - **PWA support** — Added `public/manifest.json` and PWA meta tags in `index.html` for installable progressive web app
 - **Favicon** — Added `public/favicon.svg` brain icon
-- **Security headers** — Added `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`, `Referrer-Policy`, `Permissions-Policy`, and `Content-Security-Policy` headers to `vercel.json`
+- **Security headers** — Added `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Content-Security-Policy` headers to `vercel.json`
 - **Asset caching** — Added `Cache-Control: immutable` header for built assets in `vercel.json`
 - **Keyboard navigation** — `aria-label`, `aria-current`, and `role` attributes added to navigation elements
 - **Sub-navigation** — Admin section now shows a contextual sub-nav when on `/admin/*` routes
@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - Added HTTP security headers via Vercel configuration (`X-Frame-Options: DENY`, CSP, `X-Content-Type-Options: nosniff`)
+- Removed deprecated `X-XSS-Protection` header; rely on CSP for XSS protection
+- Removed `'unsafe-inline'` from CSP `script-src`
 - Removed CDN-loaded Tailwind and ESM shim from `index.html` to reduce external script surface area
 - `DeveloperPage` access gated to `developer` role minimum via `useRequireAuth`
 - `UsersPage` (role management) gated to `admin` only
@@ -59,5 +61,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Admin dashboard (Overview, Brains, Alerts, Settings)
 - GitHub Actions CI/CD workflows
 
-[Unreleased]: https://github.com/SMSDAO/repo-brain/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/SMSDAO/repo-brain/compare/v2.2.0...v1.0.0
+[Unreleased]: https://github.com/SMSDAO/repo-brain/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/SMSDAO/repo-brain/compare/v2.2.0...v2.3.0
